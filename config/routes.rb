@@ -1,7 +1,16 @@
 Rails.application.routes.draw do
+  root to: "home#index"
+
+  resource :users,
+    only: [:edit, :update, :delete],
+    controller: 'devise/registrations',
+    as: :user_registration do
+    get 'cancel'
+  end
+
   devise_for :users, controllers: {
-        sessions: 'users/sessions'
-      }
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  root to: "schools#index"
+    sessions: 'users/sessions'
+  }, skip: [:registrations]
+
+  resources :users # creates the "normal" CRUD routes for users
 end

@@ -1,0 +1,6 @@
+<h1>Frontlearn AMS </h1>
+<h2> <%= current_user.email %>
+<br/>
+<% if can? :create, User %>
+    <%= link_to "Add Teacher", new_user_path %>
+<% end %>
