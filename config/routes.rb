@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
-  root to: "home#index"
+  root to: 'home#index'
 
   resource :users,
-    only: [:edit, :update, :delete],
-    controller: 'devise/registrations',
-    as: :user_registration do
+           only: %i[edit update delete],
+           controller: 'devise/registrations',
+           as: :user_registration do
     get 'cancel'
   end
 

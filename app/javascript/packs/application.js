@@ -17,3 +17,5 @@ require("channels");
 
 global.toastr = require("toastr");
 import "../stylesheets/application";
+import "./custom";
+import "@fortawesome/fontawesome-free/js/all";
