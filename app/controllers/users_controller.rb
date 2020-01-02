@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_action :get_user, only: [:edit, :update]
+  before_action :get_user, only: [:edit, :update, :destroy]
 
   def index
     @users = User.all
@@ -30,6 +30,11 @@ class UsersController < ApplicationController
     else
       render :new
     end
+  end
+
+  def destroy
+    @user.delete
+    redirect_to users_path, notice: 'User deleted successfully.'
   end
 
   private

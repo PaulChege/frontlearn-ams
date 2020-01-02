@@ -1,0 +1,16 @@
+<div class="container">
+  <div class = "card col-sm-6 mx-auto">
+    <div class="card-body">
+    <h2>Add School</h2>
+    <%= render "shared/error_messages", resource: @school %>
+    <%= form_for @school, url: schools_path do |f| %>
+    <div class="form-group">
+        <%= f.label :name %><br />
+        <%= f.text_field :name, autofocus: true, autocomplete: "name" ,class: "form-control" %>
+      </div>
+        <%= f.submit "Add School", class: "btn btn-primary"%>
+    <% end %>
+    </div>
+  </div>
+</div>
+

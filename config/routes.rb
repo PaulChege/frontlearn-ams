@@ -15,4 +15,7 @@ Rails.application.routes.draw do
   }, skip: [:registrations]
 
   resources :users # creates the "normal" CRUD routes for users
+  resources :schools do
+    resources :courses
+  end
 end

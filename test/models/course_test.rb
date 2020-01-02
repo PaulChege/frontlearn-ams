@@ -4,11 +4,12 @@
 #
 # Table name: courses
 #
-#  id            :bigint           not null, primary key
-#  CreateCourses :string
-#  school_id     :bigint
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
+#  id         :bigint           not null, primary key
+#  school_id  :bigint
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  name       :string
+#  level      :integer
 #
 
 
