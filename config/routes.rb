@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   root to: 'home#index'
 
   resource :users,
-           only: %i[edit update delete],
+           only: %i[delete],
            controller: 'devise/registrations',
            as: :user_registration do
     get 'cancel'

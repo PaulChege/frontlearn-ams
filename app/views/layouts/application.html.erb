@@ -17,26 +17,7 @@
           </div>
         <% end %>
     <% end %>
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a clas="navbar-brand" href="/"><img class="logo" src="/logo.png" alt="logo" width="100" heigh="100" /></a>
-        <div clas="navbar-brand"><h1 class="title"> AMS </h1></div>
-       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Schools</a>
-            </li>
-          </ul>
-          <span class="navbar-text">
-              <% if user_signed_in? %>
-              <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>  
-              (<%= current_user.email %>)   
-              <% end %>
-            </span>
-        </div>
-      </nav>
+     <%= render "layouts/navbar" %>
       <br/>
     <%= yield %>
   </body>
