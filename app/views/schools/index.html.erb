@@ -10,7 +10,7 @@
                 <div class="card-body">
                     <%= school.name %>
                 </div >
-                <%= link_to "Courses", school_courses_path(school), :class => "btn btn-sm btn-primary" %>
+                <%= link_to "Courses", school_courses_path(school), :class => "btn btn-sm btn-info" %>
                 <%= link_to "Delete", school_path(school), method: :delete, :class => "btn btn-sm btn-danger" %>
             </div>
         <% end%>

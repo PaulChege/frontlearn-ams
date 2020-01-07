@@ -14,8 +14,10 @@ Rails.application.routes.draw do
     sessions: 'users/sessions'
   }, skip: [:registrations]
 
-  resources :users # creates the "normal" CRUD routes for users
+  resources :users 
   resources :schools do
     resources :courses
   end
+
+  resources :students
 end

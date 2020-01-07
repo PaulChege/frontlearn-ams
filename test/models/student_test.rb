@@ -4,12 +4,15 @@
 #
 # Table name: students
 #
-#  id           :bigint           not null, primary key
-#  first_name   :string
-#  last_name    :string
-#  admission_no :integer
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
+#  id            :bigint           not null, primary key
+#  first_name    :string
+#  last_name     :string
+#  admission_no  :integer
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  course_id     :bigint
+#  email         :string
+#  mobile_number :string
 #
 
 
