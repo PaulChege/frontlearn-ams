@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     sessions: 'users/sessions'
   }, skip: [:registrations]
 
-  resources :users 
+  resources :users
   resources :schools do
     resources :courses
   end

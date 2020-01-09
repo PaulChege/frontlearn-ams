@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddColumnsToStudents < ActiveRecord::Migration[6.0]
   def change
     add_reference :students, :course, foreign_key: :true

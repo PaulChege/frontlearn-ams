@@ -2,7 +2,7 @@
 
 class SchoolsController < ApplicationController
   def index
-    @schools =  School.all
+    @schools = School.all
   end
 
   def new
@@ -25,7 +25,7 @@ class SchoolsController < ApplicationController
 
   private
 
-    def school_params
-      params.require(:school).permit(:name)
-    end
+  def school_params
+    params.require(:school).permit(:name)
+  end
 end

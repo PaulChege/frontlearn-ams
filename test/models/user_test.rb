@@ -17,7 +17,6 @@
 #  full_name              :string
 #
 
-
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase

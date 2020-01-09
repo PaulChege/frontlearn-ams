@@ -7,14 +7,15 @@
 #  id            :bigint           not null, primary key
 #  first_name    :string
 #  last_name     :string
-#  admission_no  :integer
+#  admission_no  :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  course_id     :bigint
 #  email         :string
 #  mobile_number :string
+#  intake_month  :integer
+#  intake_year   :integer
 #
-
 
 require 'test_helper'
 

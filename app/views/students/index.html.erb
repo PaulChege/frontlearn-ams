@@ -8,6 +8,7 @@
         <th>Last Name</th>
         <th>Admission No.</th>
         <th>Course</th>
+        <th>Intake</th>
         <th>Email</th>
         <th>Mobile Number</th>
     </thead>
@@ -25,6 +26,9 @@
                 </td>
                 <td>
                     <%= student.course.full_course_name %>
+                </td>
+                <td>
+                    <%= student.intake %>
                 </td>
                 <td>
                     <%= student.email %>

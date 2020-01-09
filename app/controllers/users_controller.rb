@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_action :get_user, only: [:edit, :update, :destroy]
+  before_action :get_user, only: %i[edit update destroy]
 
   def index
     @users = User.all
@@ -20,8 +20,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     @user.assign_attributes(user_params)
@@ -39,11 +38,11 @@ class UsersController < ApplicationController
 
   private
 
-    def get_user
-      @user = User.find(params[:id])
-    end
+  def get_user
+    @user = User.find(params[:id])
+  end
 
-    def user_params
-      params.require(:user).permit(:full_name, :email, :password, :password_confirmation)
-    end
+  def user_params
+    params.require(:user).permit(:full_name, :email, :password, :password_confirmation)
+  end
 end

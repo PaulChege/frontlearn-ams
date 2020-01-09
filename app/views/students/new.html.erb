@@ -17,6 +17,11 @@
           <%= collection_select(:student, :course_id, Course.all, :id, :full_course_name) %>
       </div>
       <div class="form-group">
+          <%= f.label "Intake" %><br />
+          <%= f.select :intake_month, Student.intake_months.keys.to_a, class: "form-control" %>
+          <%= f.select :intake_year, Student.get_intake_year_options, class: "form-control" %>
+      </div>
+      <div class="form-group">
         <%= f.label :email %><br />
         <%= f.email_field :email, autofocus: true, autocomplete: "email" ,class: "form-control" %>
       </div>
