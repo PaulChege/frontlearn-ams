@@ -49,7 +49,7 @@ class StudentsController < ApplicationController
       :intake_month,
       :intake_year,
       :email,
-      :mobile_number,
+      :mobile_number
     )
     end
 

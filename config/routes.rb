@@ -16,8 +16,12 @@ Rails.application.routes.draw do
 
   resources :users
   resources :schools do
-    resources :courses
+    resources :courses do
+      resources :units, controller: 'courses/units'
+      post 'add_unit', controller: 'courses/units'
+    end
   end
 
+  resources :units, except: %i[new create]
   resources :students
 end

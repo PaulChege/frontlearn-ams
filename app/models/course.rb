@@ -16,6 +16,8 @@ class Course < ApplicationRecord
   enum level: %w[Diploma Certificate]
   belongs_to :school
   has_many :students
+  has_many :course_units
+  has_many :units, through: :course_units
   validates :name, presence: :true
 
   def full_course_name

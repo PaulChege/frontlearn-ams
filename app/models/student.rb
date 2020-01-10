@@ -33,6 +33,6 @@ class Student < ApplicationRecord
   end
 
   def intake
-    intake_month + "-" + intake_year.to_s
+    intake_month + '-' + intake_year.to_s
   end
 end

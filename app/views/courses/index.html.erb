@@ -3,7 +3,7 @@
     <%= link_to "Delete", school_path(@school), method: :delete, :class => "btn btn-sm btn-danger" %>
 
     <div class="row float-right">
-       <%= link_to  "Add Course", new_school_course_path(@school), :class => "btn btn-primary"%>
+      <%= link_to  "Add Course", new_school_course_path(@school), :class => "btn btn-primary"%>
     </div>
     <br/>
     <br/>
@@ -15,7 +15,7 @@
                 </div >
                 <%= link_to "Edit", edit_school_course_path(@school, course), :class => "btn btn-sm btn-primary" %>
 
-                <%= link_to "Units", "#", :class => "btn btn-sm btn-info" %>
+                <%= link_to "Units", school_course_units_path(@school, course), :class => "btn btn-sm btn-info" %>
 
                 <%= link_to "Delete", school_course_path(@school, course), method: :delete, :class => "btn btn-sm btn-danger" %>
             </div>
