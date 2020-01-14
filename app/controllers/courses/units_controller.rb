@@ -27,7 +27,11 @@ class Courses::UnitsController < ApplicationController
     end
   end
 
-  def destroy; end
+  def destroy
+    @unit = Unit.find(params[:id])
+    @course.units.delete(@unit)
+    redirect_to school_course_units_path(@school, @course), notice: 'Unit removed successfully.'
+  end
 
   private
 

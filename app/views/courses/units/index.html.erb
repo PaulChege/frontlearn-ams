@@ -1,6 +1,11 @@
 <div class="container">
 	<h5>Units for <%=@course.full_course_name%></h5>
 	<br/>
+	<div class="row float-right">
+      <%= link_to  "Manage All Units", units_path, :class => "btn btn-primary"%>
+	</div>
+	<br/>
+	<br/>
 	<div class="card">
 			<div class="card-body">
 				<%= render "shared/error_messages", resource: @unit %>
@@ -13,7 +18,7 @@
 					<%= f.submit "Add", class: "btn btn-primary mx-sm-3 mb-2"%>
 				<% end %>
 				<br/>
-				<h6>Create Unit and add to Course</h6>
+				<h6>Create Unit and Add to Course</h6>
 				<br/>
 				<%= form_for @unit, url: school_course_units_path(@school, @course), html: {class: "form-inline"} do |f| %>
 					<div class="form-group mb-2">
@@ -39,9 +44,6 @@
 				<tr>
 					<td><%= unit.code%></td>
 					<td><%= unit.name%></td>
-					<td>
-						<%= link_to "Edit", edit_school_course_unit_path(@school, @course, unit), :class => "btn btn-sm btn-primary" %>
-					</td>
 					<td>
 						<%= link_to "Remove", school_course_unit_path(@school, @course, unit), method: :delete, :class => "btn btn-sm btn-danger" %>
 					</td>

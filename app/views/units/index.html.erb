@@ -1,0 +1,24 @@
+<div class="container">
+	<h5>Units for All Courses</h5>
+	<br/>
+	<table class="table">
+		<thead>
+			<th>Code</th>
+			<th>Name</th>
+		</thead>
+		<tbody>
+			<% @units.each do |unit| %>
+				<tr>
+					<td><%= unit.code%></td>
+					<td><%= unit.name%></td>
+          <td>
+						<%= link_to "Edit", edit_unit_path(unit), :class => "btn btn-sm btn-primary" %>
+					</td>
+					<td>
+						<%= link_to "Remove", unit_path(unit), method: :delete, :class => "btn btn-sm btn-danger" %>
+					</td>
+				</tr>
+			<% end%>
+		<tbody>
+	<table>
+</div>
