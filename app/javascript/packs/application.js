@@ -16,6 +16,7 @@ require("channels");
 // const imagePath = (name) => images(name, true)
 
 global.toastr = require("toastr");
+import "bootstrap";
 import "../stylesheets/application";
 import "./custom";
 import "@fortawesome/fontawesome-free/js/all";

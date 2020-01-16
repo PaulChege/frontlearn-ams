@@ -20,6 +20,7 @@
 class Student < ApplicationRecord
   validates :first_name, :last_name, :email, :mobile_number, presence: :true
   belongs_to :course
+  has_many :results
 
   enum intake_month: %w[Jan Apr Jul Oct]
 
@@ -29,7 +30,7 @@ class Student < ApplicationRecord
 
   def self.get_intake_year_options
     current_year = Date.today.year
-    [current_year - 1, current_year, current_year + 1]
+    (current_year - 2 ... current_year + 2).to_a
   end
 
   def intake

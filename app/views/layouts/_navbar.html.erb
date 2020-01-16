@@ -14,10 +14,20 @@
                 </li>
             <% end %>
             <li class="nav-item">
-              <%= link_to "Schools & Courses", schools_path, :class => "nav-link"%>
+              <%= link_to "Schools | Courses", schools_path, :class => "nav-link"%>
             </li>
             <li class="nav-item">
               <%= link_to "Students", students_path, :class => "nav-link"%>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Exams
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <%= link_to  "Exam Periods", exams_path, class: "dropdown-item"%>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Result Submission</a>
+              </div>
             </li>
           </ul>
           <span class="navbar-text">

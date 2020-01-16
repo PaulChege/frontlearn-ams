@@ -14,6 +14,7 @@
 class Unit < ApplicationRecord
   has_many :course_units
   has_many :courses, through: :course_units
+  has_many :results
   validates :code, :name, presence: true, uniqueness: true
 
   def full_unit_name

@@ -24,4 +24,5 @@ Rails.application.routes.draw do
 
   resources :units, except: %i[new create]
   resources :students
+  resources :exams, except: %i[new edit]
 end
