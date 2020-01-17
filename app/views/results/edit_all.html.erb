@@ -1,0 +1,37 @@
+<div class="container">
+	<h5>Edit Assessments</h5>
+  <h6><%= @course.full_course_name + " | " + @unit.full_unit_name %></h6>
+  <%= "Intake: " + @intake + " | " + "Semester starting: " + @assessment.full_semester_name %>
+	<br/>
+  <%= form_tag results_update_all_path, method: :patch do %>
+    <%= submit_tag "Save ", class: "btn btn-primary float-right"%>
+    <br/>
+    <br/>
+    <table class="table table-bordered">
+      <thead>
+        <th>Admission No.</th>
+        <th>Full Name</th>
+        <th>Attendance</th>
+        <th>Assignments</th>
+        <th>Practicals</th>
+        <th>CATs</th>
+        <th>Final Exam</th>
+      </thead>
+      <tbody>
+        <% @results.each do |result| %>
+          <%= fields_for "results[]", result do |f| %>
+            <tr>
+              <td><%= result.student.admission_no%></td>
+              <td><%= result.student.full_name%></td>
+              <td><%= f.number_field :attendance %></td>
+              <td><%= f.number_field :assignments %></td>
+              <td><%= f.number_field :practicals%></td>
+              <td><%= f.number_field :cats %></td>
+              <td><%= f.number_field :final_exam %></td>                  
+            </tr>
+          <%end%>
+        <%end%>
+      </tbody>
+    </table>
+  <% end%>
+</div>

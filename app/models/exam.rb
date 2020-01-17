@@ -14,9 +14,9 @@
 
 class Exam < ApplicationRecord
   has_many :results
-  enum status: [:open, :closed]
+  enum status: %i[open closed]
 
   def full_semester_name
-    semester_month.to_s + "-" + semester_year.to_s
+    semester_month.to_s + '-' + semester_year.to_s
   end
 end

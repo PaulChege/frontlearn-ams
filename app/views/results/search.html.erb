@@ -1,0 +1,28 @@
+<div class="container">
+	<h5>Choose Assessments</h5>
+	<br/>
+	<div class="card col-sm-6 mx-auto">
+			<div class="card-body">
+				<%= form_for :search, url: results_edit_all_path, method: :get do |f| %>
+          <div class="form-group">
+            <%= f.label "Course:" %><br />
+            <%= collection_select(:search, :course_id, @courses, :id, :full_course_name) %>
+          </div>
+          <%# TODO - Add JS too allow units to filter by selected course %>
+        	<div class="form-group">
+            <%= f.label "Unit examined:" %><br />
+            <%= collection_select(:search, :unit_id, @units, :id, :full_unit_name) %>
+          </div>
+          <div class="form-group">
+            <%= f.label "Students' Intake:" %><br />
+            <%= f.select :intake, @intakes, class: "form-control" %>
+          </div>
+					<div class="form-group">
+            <%= f.label "For semester starting:"%><br />
+            <%= collection_select(:search, :exam_id, @exams, :id, :full_semester_name) %>
+          </div>
+					<%= f.submit "Next", class: "btn btn-primary float-right"%>
+				<% end %>
+      </div>
+  </div>
+</div>

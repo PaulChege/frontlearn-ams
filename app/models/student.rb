@@ -22,6 +22,7 @@ class Student < ApplicationRecord
   belongs_to :course
   has_many :results
 
+  scope :search_by_intake, ->(intake) { select { |s| s.intake == intake } }
   enum intake_month: %w[Jan Apr Jul Oct]
 
   def get_admission_no
@@ -30,10 +31,18 @@ class Student < ApplicationRecord
 
   def self.get_intake_year_options
     current_year = Date.today.year
-    (current_year - 2 ... current_year + 2).to_a
+    (current_year - 2...current_year + 1).to_a
   end
 
   def intake
     intake_month + '-' + intake_year.to_s
+  end
+
+  def self.intakes
+    pluck(:intake_month, :intake_year).map { |a| a.join('-') }
+  end
+
+  def full_name
+    first_name + ' ' + last_name
   end
 end

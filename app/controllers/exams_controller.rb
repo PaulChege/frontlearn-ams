@@ -1,18 +1,17 @@
 # frozen_string_literal: true
 
 class ExamsController < ApplicationController
-  before_action :find_exam, only: [:change_status, :destroy, :update]
+  before_action :find_exam, only: %i[change_status destroy update]
   def index
     @exams = Exam.all
     @exam = Exam.new
   end
 
-  def change_status
-  end
+  def change_status; end
 
   def create
     @exam = Exam.new(exam_params)
-    @exam.status = "open"
+    @exam.status = 'open'
     if @exam.save
       redirect_to exams_path, notice: 'Exam period created successfully.'
     else
@@ -31,11 +30,12 @@ class ExamsController < ApplicationController
   end
 
   private
-    def exam_params
-      params.require(:exam).permit(:semester_month, :semester_year, :status)
-    end
 
-    def find_exam
-      @exam = Exam.find(params[:id])
-    end
+  def exam_params
+    params.require(:exam).permit(:semester_month, :semester_year, :status)
+  end
+
+  def find_exam
+    @exam = Exam.find(params[:id])
+  end
 end
