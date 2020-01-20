@@ -12,9 +12,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_200_114_144_938) do
+ActiveRecord::Schema.define(version: 20_200_120_062_910) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
+
+  create_table 'assessments', force: :cascade do |t|
+    t.string 'semester_month'
+    t.string 'semester_year'
+    t.integer 'status'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+  end
 
   create_table 'course_units', force: :cascade do |t|
     t.bigint 'course_id'
@@ -34,18 +42,10 @@ ActiveRecord::Schema.define(version: 20_200_114_144_938) do
     t.index ['school_id'], name: 'index_courses_on_school_id'
   end
 
-  create_table 'exams', force: :cascade do |t|
-    t.string 'semester_month'
-    t.string 'semester_year'
-    t.integer 'status'
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
-  end
-
   create_table 'results', force: :cascade do |t|
     t.bigint 'unit_id'
     t.bigint 'student_id'
-    t.bigint 'exam_id'
+    t.bigint 'assessment_id'
     t.float 'attendance'
     t.float 'assignments'
     t.float 'practicals'
@@ -53,7 +53,9 @@ ActiveRecord::Schema.define(version: 20_200_114_144_938) do
     t.float 'final_exam'
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
-    t.index ['exam_id'], name: 'index_results_on_exam_id'
+    t.float 'final_mark'
+    t.string 'final_grade'
+    t.index ['assessment_id'], name: 'index_results_on_assessment_id'
     t.index ['student_id'], name: 'index_results_on_student_id'
     t.index ['unit_id'], name: 'index_results_on_unit_id'
   end
@@ -103,7 +105,7 @@ ActiveRecord::Schema.define(version: 20_200_114_144_938) do
   add_foreign_key 'course_units', 'courses'
   add_foreign_key 'course_units', 'units'
   add_foreign_key 'courses', 'schools'
-  add_foreign_key 'results', 'exams'
+  add_foreign_key 'results', 'assessments'
   add_foreign_key 'results', 'students'
   add_foreign_key 'results', 'units'
   add_foreign_key 'students', 'courses'

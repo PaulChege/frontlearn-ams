@@ -39,7 +39,7 @@ class Student < ApplicationRecord
   end
 
   def self.intakes
-    pluck(:intake_month, :intake_year).map { |a| a.join('-') }
+    pluck(:intake_month, :intake_year).map { |a| a.join('-') }.uniq!
   end
 
   def full_name

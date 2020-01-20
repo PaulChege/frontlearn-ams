@@ -1,5 +1,5 @@
 <div class="container">
-	<h5>Choose Assessments</h5>
+	<h5>Choose Assessment</h5>
 	<br/>
 	<div class="card col-sm-6 mx-auto">
 			<div class="card-body">
@@ -10,8 +10,8 @@
           </div>
           <%# TODO - Add JS too allow units to filter by selected course %>
         	<div class="form-group">
-            <%= f.label "Unit examined:" %><br />
-            <%= collection_select(:search, :unit_id, @units, :id, :full_unit_name) %>
+            <%= f.label "Unit assessed:" %><br />
+          <%= collection_select(:search, :unit_id, @units, :id, :full_unit_name) %>
           </div>
           <div class="form-group">
             <%= f.label "Students' Intake:" %><br />
@@ -19,7 +19,7 @@
           </div>
 					<div class="form-group">
             <%= f.label "For semester starting:"%><br />
-            <%= collection_select(:search, :exam_id, @exams, :id, :full_semester_name) %>
+            <%= collection_select(:search, :assessment_id, @assessments, :id, :full_semester_name) %>
           </div>
 					<%= f.submit "Next", class: "btn btn-primary float-right"%>
 				<% end %>

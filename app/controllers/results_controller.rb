@@ -5,29 +5,35 @@ class ResultsController < ApplicationController
   def search
     @courses = Course.all
     @units = Unit.all
-    @exams = Exam.where(status: 'open')
+    @assessments = Assessment.where(status: 'open')
     @intakes = Student.intakes
+    if @assessments.empty?
+      redirect_to root_path, notice: 'Sorry, There are currently no open assessments.'
+    end
   end
 
   def edit_all
     @course = Course.find(search_params[:course_id])
     @unit = Unit.find(search_params[:unit_id])
     @intake = search_params[:intake]
-    @assessment = Exam.find(search_params[:exam_id])
+    @assessment = Assessment.find(search_params[:assessment_id])
+    @redirect_params = { 'search' => search_params }
     if @results.empty?
-      redirect_to results_search_path, notice: 'No Results. There are no students scheduled for the chosen assessment.'
+      redirect_to results_search_path,
+                  notice: 'No Results. There are no students scheduled for the chosen assessment.'
     end
   end
 
   def update
     Result.update(params[:results].keys, params[:results].values)
-    redirect_to results_search_path, notice: 'Results updated successfully.'
+    redirect_to results_edit_all_path('search' => search_params),
+                notice: 'Results updated successfully.'
   end
 
   private
 
   def search_params
-    params.require(:search).permit(:course_id, :unit_id, :intake, :exam_id)
+    params.require(:search).permit(:course_id, :unit_id, :intake, :assessment_id)
   end
 
   def find_or_create_results
@@ -38,7 +44,7 @@ class ResultsController < ApplicationController
     @results = students.map do |student|
       student.results.find_or_create_by(
         unit_id: search_params[:unit_id],
-        exam_id: search_params[:exam_id]
+        assessment_id: search_params[:assessment_id]
       )
     end
   end

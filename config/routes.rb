@@ -24,7 +24,7 @@ Rails.application.routes.draw do
 
   resources :units, except: %i[new create]
   resources :students
-  resources :exams, except: %i[new edit]
+  resources :assessments, except: %i[new edit]
   resources :results, only: %i[edit update]
   namespace :results do
     get 'search'

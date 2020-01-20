@@ -2,7 +2,7 @@
 
 # == Schema Information
 #
-# Table name: exams
+# Table name: assessments
 #
 #  id             :bigint           not null, primary key
 #  semester_month :string
@@ -12,7 +12,7 @@
 #  updated_at     :datetime         not null
 #
 
-class Exam < ApplicationRecord
+class Assessment < ApplicationRecord
   has_many :results
   enum status: %i[open closed]
 

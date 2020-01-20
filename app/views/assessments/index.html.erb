@@ -1,13 +1,13 @@
 <div class="container">
-	<h5>Exam Periods</h5>
+	<h5>Assessment Periods</h5>
 	<br/>
 	<br/>
 	<div class="card">
 			<div class="card-body">
-				<%= render "shared/error_messages", resource: @exam %>
-				<h6>Create Exam Period</h6>
+				<%= render "shared/error_messages", resource: @assessment %>
+				<h6>Create Assessment Period</h6>
 				<br/>
-				<%= form_for @exam, url: exams_path, html: {class: "form-inline"} do |f| %>
+				<%= form_for @assessment, url: assessments_path, html: {class: "form-inline"} do |f| %>
 					<div class="form-group mb-2 ">
             <%= f.label "Semester starting:" , class: "mx-sm-3"%><br />
             <%# TODO - Move intake functions to general helper %>
@@ -25,29 +25,29 @@
 			<th>Status</th>
 		</thead>
 		<tbody>
-			<% @exams.each do |exam| %>
+			<% @assessments.each do |assessment| %>
 				<tr>
-					<td><%= exam.full_semester_name%></td>
+					<td><%= assessment.full_semester_name%></td>
 					<td>
-					<% if exam.open?%> 
+					<% if assessment.open?%> 
 						<span class="badge badge-success">
 					<%else%>
 						<span class="badge badge-danger">
 					<%end%>
-						<%= exam.status%>
+						<%= assessment.status%>
 						</span>
 					</td>
-					<%if exam.open?%>
+					<%if assessment.open?%>
 						<td>
-							<%= link_to "Close", exam_path(exam), method: :patch, :class => "btn btn-sm btn-danger" %>
+							<%= link_to "Close", assessment_path(assessment), method: :patch, :class => "btn btn-sm btn-danger" %>
 						</td>
 					<%else%>
 						<td>
-							<%= link_to "Open", exam_path(exam), method: :patch, :class => "btn btn-sm btn-success" %>
+							<%= link_to "Open", assessment_path(assessment), method: :patch, :class => "btn btn-sm btn-success" %>
 						</td>
 					<%end%>
 					<td>
-						<%= link_to "Remove", exam_path(exam), method: :delete, :class => "btn btn-sm btn-danger" %>
+						<%= link_to "Remove", assessment_path(assessment), method: :delete, :class => "btn btn-sm btn-danger" %>
 					</td>
 				</tr>
 			<% end%>
