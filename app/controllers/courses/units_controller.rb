@@ -1,9 +1,17 @@
 # frozen_string_literal: true
 
 class Courses::UnitsController < ApplicationController
-  before_action :get_school, :get_course, :get_units
+  before_action :get_school, :get_course, :get_units,  except: :units_json
+
   def index
     @unit = Unit.new
+  end
+
+  def units_json
+    @units = Course.find(params[:id]).units
+    respond_to do |format|
+      format.json { render json: @units }
+    end
   end
 
   def create

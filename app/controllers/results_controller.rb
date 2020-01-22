@@ -13,15 +13,16 @@ class ResultsController < ApplicationController
   end
 
   def edit_all
+    if @results.empty? || !search_params[:course_id].present?
+      redirect_to results_search_path, 
+        notice: 'No Results. There are no students scheduled for the chosen assessment.' 
+      return
+    end
     @course = Course.find(search_params[:course_id])
     @unit = Unit.find(search_params[:unit_id])
     @intake = search_params[:intake]
     @assessment = Assessment.find(search_params[:assessment_id])
     @redirect_params = { 'search' => search_params }
-    if @results.empty?
-      redirect_to results_search_path,
-                  notice: 'No Results. There are no students scheduled for the chosen assessment.'
-    end
   end
 
   def update

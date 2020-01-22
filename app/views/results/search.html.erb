@@ -1,17 +1,18 @@
 <div class="container">
 	<h5>Choose Assessment</h5>
 	<br/>
+  <span data-bind="text: myMessage"></span>
 	<div class="card col-sm-6 mx-auto">
 			<div class="card-body">
 				<%= form_for :search, url: results_edit_all_path, method: :get do |f| %>
           <div class="form-group">
             <%= f.label "Course:" %><br />
-            <%= collection_select(:search, :course_id, @courses, :id, :full_course_name) %>
+            <%= collection_select(
+              :search, :course_id, @courses, :id, :full_course_name, :prompt => true)%>
           </div>
-          <%# TODO - Add JS too allow units to filter by selected course %>
         	<div class="form-group">
             <%= f.label "Unit assessed:" %><br />
-          <%= collection_select(:search, :unit_id, @units, :id, :full_unit_name) %>
+            <%= f.select :unit_id, [], class: "form-control" %>
           </div>
           <div class="form-group">
             <%= f.label "Students' Intake:" %><br />

@@ -22,6 +22,10 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :courses do
+    get ":id/units_json" => "units#units_json" 
+  end
+
   resources :units, except: %i[new create]
   resources :students
   resources :assessments, except: %i[new edit]
