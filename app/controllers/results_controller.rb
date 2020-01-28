@@ -2,6 +2,20 @@
 
 class ResultsController < ApplicationController
   before_action :find_or_create_results, only: :edit_all
+
+  def index
+    @assessments = Assessment.all
+    @courses = Course.all
+    @results = []
+    if params[:search].present?
+      @results = Result
+        .where(unit_id: search_params[:unit_id])
+        .where(assessment_id: search_params[:assessment_id])
+      @params = search_params
+    end
+
+  end
+
   def search
     @courses = Course.all
     @units = Unit.all

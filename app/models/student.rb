@@ -20,7 +20,7 @@
 class Student < ApplicationRecord
   validates :first_name, :last_name, :email, :mobile_number, presence: :true
   belongs_to :course
-  has_many :results
+  has_many :results, :dependent => :delete_all
 
   scope :search_by_intake, ->(intake) { select { |s| s.intake == intake } }
   enum intake_month: %w[Jan Apr Jul Oct]
