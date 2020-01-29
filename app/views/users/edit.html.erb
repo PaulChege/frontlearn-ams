@@ -12,6 +12,14 @@
         <%= f.label :email %><br />
         <%= f.email_field :email, autofocus: true, autocomplete: "email" ,class: "form-control" %>
       </div>
+      <div class="form-group">
+       <% User.roles.keys.each do |role| %>
+          <%= f.label role, class: "mx-sm-2" do%> 
+          <%= f.radio_button :role, role%>
+          <%= role.humanize%>
+          <%end%>
+        <% end %>      
+      </div>
       <%= f.submit "Save", class: "btn btn-primary"%>
     <% end %>
     </div>

@@ -12,9 +12,8 @@
 #  remember_created_at    :datetime
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
-#  admin_role             :boolean
-#  teacher_role           :boolean
 #  full_name              :string
+#  role                   :integer
 #
 
 class User < ApplicationRecord
@@ -22,5 +21,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  validates :full_name, presence: :true
+  validates :full_name, :role, presence: :true
+  
+  enum role: [:lecturer, :admin]
 end

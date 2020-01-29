@@ -12,9 +12,8 @@
 #  remember_created_at    :datetime
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
-#  admin_role             :boolean
-#  teacher_role           :boolean
 #  full_name              :string
+#  role                   :integer
 #
 
 require 'test_helper'

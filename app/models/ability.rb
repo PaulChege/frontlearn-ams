@@ -5,7 +5,7 @@ class Ability
 
   def initialize(user)
     if user
-      can :create, User if user.admin_role
+      can :create, User if user.admin?
     end
   end
 end
