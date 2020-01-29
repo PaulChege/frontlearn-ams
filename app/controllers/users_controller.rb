@@ -2,6 +2,7 @@
 
 class UsersController < ApplicationController
   before_action :get_user, only: %i[edit update destroy]
+  before_action :authorize
 
   def index
     @users = User.all
@@ -37,6 +38,9 @@ class UsersController < ApplicationController
   end
 
   private
+  def authorize
+    authorize! :crud, User
+  end
 
   def get_user
     @user = User.find(params[:id])

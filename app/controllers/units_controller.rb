@@ -2,6 +2,7 @@
 
 class UnitsController < ApplicationController
   before_action :get_unit, except: :index
+  before_action :authorize
 
   def index
     @units = Unit.all
@@ -24,6 +25,10 @@ class UnitsController < ApplicationController
   end
 
   private
+
+  def authorize
+    authorize! :crud, Unit
+  end
 
   def get_unit
     @unit = Unit.find(params[:id])

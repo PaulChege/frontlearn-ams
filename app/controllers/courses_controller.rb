@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class CoursesController < ApplicationController
-  before_action :get_school
+  before_action :get_school, :authorize
   before_action :get_course, only: %i[edit update destroy]
 
   def index
@@ -38,6 +38,10 @@ class CoursesController < ApplicationController
   end
 
   private
+
+  def authorize
+    authorize! :crud, Course
+  end
 
   def get_school
     @school = School.find(params[:school_id])

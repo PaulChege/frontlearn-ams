@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Courses::UnitsController < ApplicationController
-  before_action :get_school, :get_course, :get_units,  except: :units_json
+  before_action :get_school, :get_course, :get_units, :authorize, except: :units_json
 
   def index
     @unit = Unit.new
@@ -42,6 +42,10 @@ class Courses::UnitsController < ApplicationController
   end
 
   private
+
+  def authorize
+    authorize! :crud, Unit
+  end
 
   def unit_params
     params.require(:unit).permit(:code, :name)

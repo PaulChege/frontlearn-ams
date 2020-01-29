@@ -1,8 +1,8 @@
 <div class="container">
-	<h5>Units for All Courses</h5>
+	<h4>Units for All Courses</h4>
 	<br/>
-  <table class="table table-bordered table-responsive">
-		<thead>
+  <table class="table table-bordered table-responsive-sm table-sm">
+    <thead class="thead-light">
 			<th>Code</th>
 			<th>Name</th>
 		</thead>
@@ -13,8 +13,6 @@
 					<td><%= unit.name%></td>
           <td>
 						<%= link_to "Edit", edit_unit_path(unit), :class => "btn btn-sm btn-primary" %>
-					</td>
-					<td>
 						<%= link_to "Remove", unit_path(unit), method: :delete, :class => "btn btn-sm btn-danger" %>
 					</td>
 				</tr>

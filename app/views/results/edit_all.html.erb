@@ -1,5 +1,5 @@
 <div class="container">
-	<h5>Edit Assessment</h5>
+	<h4>Edit Assessment</h4>
   <h6><%= @course.full_course_name + " | " + @unit.full_unit_name %></h6>
   <%= "Intake: " + @intake + " | " + "Semester starting: " + @assessment.full_semester_name %>
 	<br/>
@@ -7,8 +7,8 @@
     <%= submit_tag "Save ", class: "btn btn-primary float-right"%>
     <br/>
     <br/>
-    <table class="table table-bordered table-responsive">
-      <thead>
+    <table class="table table-bordered table-responsive-sm table-sm">
+      <thead class="thead-light">
         <th>Admission No.</th>
         <th>Full Name</th>
         <th>Attendance (30)</th>

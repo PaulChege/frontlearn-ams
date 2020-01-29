@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class SchoolsController < ApplicationController
+  before_action :authorize
+
   def index
     @schools = School.all
   end
@@ -24,6 +26,10 @@ class SchoolsController < ApplicationController
   end
 
   private
+
+  def authorize
+    authorize! :crud, School  
+  end
 
   def school_params
     params.require(:school).permit(:name)

@@ -1,5 +1,5 @@
 <div class="container">
-	<h5>Units for <%=@course.full_course_name%></h5>
+	<h4>Units for <%=@course.full_course_name%></h4>
 	<br/>
 	<div class="row float-right">
       <%= link_to  "Manage All Units", units_path, :class => "btn btn-primary"%>
@@ -34,8 +34,8 @@
 		</div>
 	</div>
 	<br/>
-	<table class="table">
-		<thead>
+  <table class="table table-bordered table-responsive-sm table-sm col-sm-6">
+    <thead class="thead-light">
 			<th>Code</th>
 			<th>Name</th>
 		</thead>

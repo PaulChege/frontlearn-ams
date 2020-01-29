@@ -1,13 +1,16 @@
 <div class="container">
-	<h5>Students</h5>
-    <%= link_to  "Add Student", new_student_path, :class => "btn btn-primary float-right"%>
+	<h4>Students</h4>
+		<%if can? :modify, Student%>
+    	<%= link_to  "Add Student", new_student_path, :class => "btn btn-primary float-right"%>
+		<%end%>
+
     <br/>
     <br/>
-    <table class="table table-bordered table-responsive">
-    <thead>
+    <table class="table table-bordered table-responsive-sm table-sm">
+    <thead class="thead-light">
+		    <th>Admission No.</th>
         <th>First Name</th>
         <th>Last Name</th>
-        <th>Admission No.</th>
         <th>Course</th>
         <th>Intake</th>
         <th>Email</th>
@@ -17,13 +20,13 @@
         <% @students.each do |student| %>
             <tr>
                 <td>
+                    <%= student.admission_no %>
+                </td>
+                <td>
                     <%= student.first_name %>
                 </td>
                  <td>
                     <%= student.last_name %>
-                </td>
-                <td>
-                    <%= student.admission_no %>
                 </td>
                 <td>
                     <%= student.course.full_course_name %>
@@ -37,12 +40,12 @@
                 <td>
                     <%= student.mobile_number %>
                 </td>
+								<% if can? :modify, Student %>
                 <td>
                     <%= link_to "Edit", edit_student_path(student), :class => "btn btn-primary"%>
-                </td>
-                <td>
                     <%= link_to "Delete", student_path(student), method: :delete, :class => "btn btn-danger"%>
                 </td>
+								<%end%>
             </tr>
             
         <% end %>

@@ -2,6 +2,7 @@
 
 class StudentsController < ApplicationController
   before_action :get_student, only: %i[edit update destroy]
+  before_action :authorize, except: :index
 
   def index
     @students = Student.all
@@ -54,6 +55,10 @@ class StudentsController < ApplicationController
     end
 
   private
+
+  def authorize
+    authorize! :modify, Student
+  end
 
   def get_student
     @student = Student.find(params[:id])

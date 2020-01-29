@@ -2,6 +2,8 @@
 
 class AssessmentsController < ApplicationController
   before_action :find_assessment, only: %i[change_status destroy update]
+  before_action :authorize
+
   def index
     @assessments = Assessment.all
     @assessment = Assessment.new
@@ -37,5 +39,9 @@ class AssessmentsController < ApplicationController
 
   def find_assessment
     @assessment = Assessment.find(params[:id])
+  end
+
+  def authorize
+    authorize! :crud, Assessment
   end
 end
