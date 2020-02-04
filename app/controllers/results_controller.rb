@@ -9,11 +9,10 @@ class ResultsController < ApplicationController
     @results = []
     if params[:search].present?
       @results = Result
-        .where(unit_id: search_params[:unit_id])
-        .where(assessment_id: search_params[:assessment_id])
+                 .where(unit_id: search_params[:unit_id])
+                 .where(assessment_id: search_params[:assessment_id])
       @params = search_params
     end
-
   end
 
   def search
@@ -28,8 +27,8 @@ class ResultsController < ApplicationController
 
   def edit_all
     if @results.empty? || !search_params[:course_id].present?
-      redirect_to results_search_path, 
-        notice: 'No Results. There are no students scheduled for the chosen assessment.' 
+      redirect_to results_search_path,
+                  notice: 'No Results. There are no students scheduled for the chosen assessment.'
       return
     end
     @course = Course.find(search_params[:course_id])

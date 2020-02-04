@@ -1,4 +1,5 @@
-// var ko = require("knockout");
+import Swal from "sweetalert2";
+
 document.addEventListener("turbolinks:load", () => {
   if (window.location.pathname == "/results") {
     getUnits();
@@ -9,8 +10,8 @@ document.addEventListener("turbolinks:load", () => {
 });
 
 const getUnits = () => {
-  course_dd = document.getElementById("search_course_id");
-  units_dd = document.getElementById("search_unit_id");
+  var course_dd = document.getElementById("search_course_id");
+  var units_dd = document.getElementById("search_unit_id");
   $("#search_unit_id").empty();
   $.getJSON(`/courses/${course_dd.value}/units_json`, function(data) {
     data.forEach(unit => {

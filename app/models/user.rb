@@ -22,6 +22,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   validates :full_name, :role, presence: :true
-  
-  enum role: [:lecturer, :admin]
+
+  enum role: %i[lecturer admin]
 end

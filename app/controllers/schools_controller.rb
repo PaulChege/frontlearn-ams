@@ -21,14 +21,14 @@ class SchoolsController < ApplicationController
   end
 
   def destroy
-    School.find(params[:id]).delete
+    School.find(params[:id]).destroy
     redirect_to schools_path, notice: 'School deleted successfully.'
   end
 
   private
 
   def authorize
-    authorize! :crud, School  
+    authorize! :crud, School
   end
 
   def school_params

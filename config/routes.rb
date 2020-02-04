@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   end
 
   namespace :courses do
-    get ":id/units_json" => "units#units_json" 
+    get ':id/units_json' => 'units#units_json'
   end
 
   resources :units, except: %i[new create]

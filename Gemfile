@@ -69,4 +69,5 @@ gem 'bootstrap', '~>4.3.1'
 # Icons and Fonts
 gem 'font_awesome5_rails'
 
+# Ruby code linting
 gem 'rubocop', require: false

@@ -1,5 +1,5 @@
 <div class="container">
-	<h5>Assessment Periods</h5>
+	<h4>Assessment Periods</h4>
 	<br/>
 	<br/>
 	<div class="card">
@@ -14,15 +14,16 @@
             <%= f.select :semester_month, Student.intake_months.keys.to_a, class: "form-control" %>
             <%= f.select :semester_year, Student.get_intake_year_options, class: "form-control" %>
           </div>
-					<%= f.submit "Create", class: "btn btn-primary mx-sm-3 mb-2"%>
+					<%= f.submit "Create", class: "btn btn-primary mx-sm-3 mb-2 btn-sm"%>
 				<% end %>
 		</div>
 	</div>
 	<br/>
-	<table class="table table-bordered table-responsive">
-		<thead>
+	<table class="table table-bordered table-responsive-sm table-sm col-sm-6">
+		<thead class="thead-light">
 			<th>Semester starting</th>
 			<th>Status</th>
+			<th></th>
 		</thead>
 		<tbody>
 			<% @assessments.each do |assessment| %>
@@ -32,22 +33,26 @@
 					<% if assessment.open?%> 
 						<span class="badge badge-success">
 					<%else%>
-						<span class="badge badge-danger">
+						<span class="badge badge-warning">
 					<%end%>
 						<%= assessment.status%>
 						</span>
 					</td>
-					<%if assessment.open?%>
-						<td>
-							<%= link_to "Close", assessment_path(assessment), method: :patch, :class => "btn btn-sm btn-danger" %>
-						</td>
-					<%else%>
-						<td>
-							<%= link_to "Open", assessment_path(assessment), method: :patch, :class => "btn btn-sm btn-success" %>
-						</td>
-					<%end%>
 					<td>
-						<%= link_to "Remove", assessment_path(assessment), method: :delete, :class => "btn btn-sm btn-danger" %>
+					<%if assessment.open?%>
+							<%= link_to "Close", assessment_path(assessment), 
+								method: :patch, :class => "btn btn-sm btn-outline-warning mx-sm-2" %>
+					<%else%>
+							<%= link_to "Open", assessment_path(assessment), 
+								method: :patch, :class => "btn btn-sm btn-outline-success mx-sm-2" %>
+					<%end%>
+						<%= link_to "Remove", assessment_path(assessment), 
+							method: :delete,
+							data: { 
+								confirm_swal:
+								 "Are you sure you want to delete assessment period - #{assessment.full_semester_name} ?"
+							},  
+							:class => "btn btn-sm btn-outline-danger" %>
 					</td>
 				</tr>
 			<% end%>

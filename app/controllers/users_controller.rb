@@ -33,11 +33,12 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user.delete
+    @user.destroy
     redirect_to users_path, notice: 'User deleted successfully.'
   end
 
   private
+
   def authorize
     authorize! :crud, User
   end

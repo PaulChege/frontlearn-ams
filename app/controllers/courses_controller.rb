@@ -33,7 +33,7 @@ class CoursesController < ApplicationController
   end
 
   def destroy
-    @course.delete
+    @course.destroy
     redirect_to school_courses_path, notice: 'Course deleted successfully.'
   end
 

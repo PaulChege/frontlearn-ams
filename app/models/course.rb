@@ -13,12 +13,14 @@
 #
 
 class Course < ApplicationRecord
-  enum level: %w[Diploma Certificate]
   belongs_to :school
-  has_many :students
-  has_many :course_units
-  has_many :units, through: :course_units
+  has_many :students, dependent: :nullify
+  has_many :course_units, dependent: :delete_all
+  has_many :units, through: :course_units, dependent: :delete_all
+
   validates :name, presence: :true
+
+  enum level: %w[Diploma Certificate]
 
   def full_course_name
     level + ' in ' + name

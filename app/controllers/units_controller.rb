@@ -20,7 +20,7 @@ class UnitsController < ApplicationController
   end
 
   def destroy
-    @unit.delete
+    @unit.destroy
     redirect_to units_path, notice: 'Unit deleted successfully.'
   end
 

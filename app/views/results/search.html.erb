@@ -1,5 +1,5 @@
 <div class="container">
-	<h5>Choose Assessment</h5>
+	<h4>Choose Assessment</h4>
 	<br/>
   <span data-bind="text: myMessage"></span>
 	<div class="card col-sm-6 mx-auto">
@@ -19,7 +19,7 @@
             <%= f.select :intake, @intakes, class: "form-control" %>
           </div>
 					<div class="form-group">
-            <%= f.label "For semester starting:"%><br />
+            <%= f.label "Exams for semester starting:"%><br />
             <%= collection_select(:search, :assessment_id, @assessments, :id, :full_semester_name) %>
           </div>
 					<%= f.submit "Next", class: "btn btn-primary float-right"%>

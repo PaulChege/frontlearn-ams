@@ -1,8 +1,8 @@
 <div class="container">
 	<h4>Units for <%=@course.full_course_name%></h4>
 	<br/>
-	<div class="row float-right">
-      <%= link_to  "Manage All Units", units_path, :class => "btn btn-primary"%>
+	<div class="float-right">
+      <%= link_to  "Manage All Units", units_path, :class => "btn btn-outline-primary btn-sm"%>
 	</div>
 	<br/>
 	<br/>
@@ -34,10 +34,11 @@
 		</div>
 	</div>
 	<br/>
-  <table class="table table-bordered table-responsive-sm table-sm col-sm-6">
+  <table class="table table-bordered table-responsive-sm table-sm col-sm-5">
     <thead class="thead-light">
 			<th>Code</th>
 			<th>Name</th>
+			<th></th>
 		</thead>
 		<tbody>
 			<% @units.each do |unit| %>
@@ -45,7 +46,13 @@
 					<td><%= unit.code%></td>
 					<td><%= unit.name%></td>
 					<td>
-						<%= link_to "Remove", school_course_unit_path(@school, @course, unit), method: :delete, :class => "btn btn-sm btn-danger" %>
+						<%= link_to "Remove", 
+							school_course_unit_path(@school, @course, unit), 
+							method: :delete, 
+							data: { 
+									confirm_swal: "Are you sure you want to remove #{unit.name} from #{@course.full_course_name}?"
+							}, 
+							:class => "btn btn-sm btn-outline-danger" %>
 					</td>
 				</tr>
 			<% end%>

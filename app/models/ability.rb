@@ -9,7 +9,7 @@ class Ability
     if user
       if user.admin?
         can :crud, User
-        can :crud, School 
+        can :crud, School
         can :crud, Course
         can :crud, Unit
         can :crud, Assessment

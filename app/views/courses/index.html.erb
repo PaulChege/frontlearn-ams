@@ -1,23 +1,27 @@
 <div class="container">
 	<h4>School of <%=@school.name%></h4>
-	<%= link_to "Delete", school_path(@school), method: :delete, :class => "btn btn-sm btn-danger" %>
-
-	<div class="row float-right">
-		<%= link_to  "Add Course", new_school_course_path(@school), :class => "btn btn-primary"%>
+	<div class="float-right">
+		<%= link_to  "Add Course", new_school_course_path(@school), :class => "btn btn-sm btn-outline-primary"%>
 	</div>
 	<br/>
 	<br/>
 	<div class="row">
 			<% @courses.each do |course|%>
-					<div class="card">
+					<div class="card mx-sm-3">
 							<div class="card-body">
 									<%= course.full_course_name%>
 							</div >
-							<%= link_to "Edit", edit_school_course_path(@school, course), :class => "btn btn-sm btn-primary" %>
-
-							<%= link_to "Units", school_course_units_path(@school, course), :class => "btn btn-sm btn-info" %>
-
-							<%= link_to "Delete", school_course_path(@school, course), method: :delete, :class => "btn btn-sm btn-danger" %>
+							<%= link_to "Edit", edit_school_course_path(@school, course), 
+								:class => "btn btn-sm btn-outline-primary mx-sm-2" %>
+							<%= link_to "Units", school_course_units_path(@school, course), 
+								:class => "btn btn-sm btn-outline-info mx-sm-2" %>
+							<%= link_to "Delete", school_course_path(@school, course), 
+								method: :delete,
+								data: { 
+									confirm_swal: "Are you sure you want to delete course - #{course.full_course_name} ?"
+								}, 
+								:class => "btn btn-sm btn-outline-danger mx-sm-2" %>
+						
 					</div>
 			<% end%>
 	</div>

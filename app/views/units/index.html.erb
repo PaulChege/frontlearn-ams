@@ -1,10 +1,11 @@
 <div class="container">
 	<h4>Units for All Courses</h4>
 	<br/>
-  <table class="table table-bordered table-responsive-sm table-sm">
+  <table class="table table-bordered table-responsive-sm table-sm col-sm-6">
     <thead class="thead-light">
 			<th>Code</th>
 			<th>Name</th>
+			<th></th>
 		</thead>
 		<tbody>
 			<% @units.each do |unit| %>
@@ -12,8 +13,14 @@
 					<td><%= unit.code%></td>
 					<td><%= unit.name%></td>
           <td>
-						<%= link_to "Edit", edit_unit_path(unit), :class => "btn btn-sm btn-primary" %>
-						<%= link_to "Remove", unit_path(unit), method: :delete, :class => "btn btn-sm btn-danger" %>
+						<%= link_to "Edit", edit_unit_path(unit), 
+							:class => "btn btn-sm btn-outline-primary mx-sm-2" %>
+						<%= link_to "Remove", unit_path(unit), 
+							method: :delete, 
+							data: { 
+								confirm_swal: "Are you sure you want to delete unit #{unit.full_unit_name} from the system ?"
+							}, 
+							:class => "btn btn-sm btn-outline-danger" %>
 					</td>
 				</tr>
 			<% end%>
