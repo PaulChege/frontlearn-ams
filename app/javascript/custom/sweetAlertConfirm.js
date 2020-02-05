@@ -12,12 +12,10 @@ const confirmed = (element, result) => {
 // Display the confirmation dialog
 const showConfirmationDialog = element => {
   const message = element.getAttribute("data-confirm-swal");
-  const text = element.getAttribute("data-text");
 
   sweetAlert
     .fire({
       title: message || "Are you sure?",
-      text: text || "",
       icon: "warning",
       width: 500,
       padding: "3em",
@@ -46,5 +44,6 @@ function handleConfirm(element) {
 // Add event listener before the other Rails event listeners like the one
 // for `method: :delete`
 Rails.delegate(document, "a[data-confirm-swal]", "click", handleConfirm);
+Rails.delegate(document, "input[data-confirm-swal]", "click", handleConfirm);
 
 Rails.start();

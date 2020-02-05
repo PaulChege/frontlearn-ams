@@ -1,0 +1,7 @@
+Dear <%= @student.full_name %>,
+Here are your results for the assessments done during the semester starting:  <%= @assessment.full_semester_name %>
+===============================================
+<%= @results.each do |result| %>
+<%= result.unit.full_unit_name %>  | <%= result.final_mark %> | <%= result.final_grade %>
+===============================================
+<%end%>

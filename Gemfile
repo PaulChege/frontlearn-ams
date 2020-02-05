@@ -71,3 +71,6 @@ gem 'font_awesome5_rails'
 
 # Ruby code linting
 gem 'rubocop', require: false
+
+gem 'dotenv-rails', groups: [:development, :test]
+

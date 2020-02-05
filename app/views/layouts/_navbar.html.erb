@@ -1,47 +1,51 @@
  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/">
-          <img class="logo" src="/logo.png" alt="logo" width="100" heigh="100" />
-        </a>
-        <div clas="navbar-brand"><h1 class="title"> AMS </h1></div>
-       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <ul class="navbar-nav mr-auto">
-            <% if can? :crud, User %>
-              <li class= "nav-item" >
-                <%= link_to "Users", users_path, :class => "nav-link #{current_class?("users")}"%>
-              </li>
-            <% end %>
-            <% if (can? :crud, School) && (can? :crud, Course) && (can? :crud, Unit) %>
-              <li class="nav-item">
-                <%= link_to "Schools | Courses", schools_path, :class => "nav-link #{current_class?("schools")} #{current_class?("courses")} #{current_class?("units")}"%>
-              </li>
+    <a class="navbar-brand" href="/">
+      <img class="logo" src="/logo.png" alt="logo" width="100" heigh="100" />
+    </a>
+    <div clas="navbar-brand"><h1 class="title"> AMS </h1></div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <ul class="navbar-nav mr-auto">
+        <% if can? :crud, User %>
+          <li class= "nav-item" >
+            <%= link_to "Users", users_path, :class => "nav-link #{current_class?("users")}"%>
+          </li>
+        <% end %>
+        <% if (can? :crud, School) && (can? :crud, Course) && (can? :crud, Unit) %>
+          <li class="nav-item">
+            <%= link_to "Schools | Courses", schools_path, :class => "nav-link #{current_class?("schools")} #{current_class?("courses")} #{current_class?("units")}"%>
+          </li>
+        <%end%>
+        <li class="nav-item">
+          <%= link_to "Students", students_path, :class => "nav-link #{current_class?("students")}"%>
+        </li>
+        <li class="nav-item dropdown">
+          <%=link_to "Assessments", "#", {:class=>"nav-link dropdown-toggle #{current_class?("assessments")} #{current_class?("results")}", :id=>"navbarDropdown", :role=>"button", 'data-toggle'=>"dropdown" ,'aria-haspopup'=>"true", 'aria-expanded'=>"false"} %>
+            
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <% if can? :crud, Assessment %>
+              <%= link_to  "Manage Assessment Periods", assessments_path, class: "dropdown-item"%>
+              <div class="dropdown-divider"></div>
             <%end%>
-            <li class="nav-item">
-              <%= link_to "Students", students_path, :class => "nav-link #{current_class?("students")}"%>
-            </li>
-            <li class="nav-item dropdown">
-              <%=link_to "Assessments", "#", {:class=>"nav-link dropdown-toggle #{current_class?("assessments")} #{current_class?("results")}", :id=>"navbarDropdown", :role=>"button", 'data-toggle'=>"dropdown" ,'aria-haspopup'=>"true", 'aria-expanded'=>"false"} %>
-                
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <% if can? :crud, Assessment %>
-                  <%= link_to  "Manage Assessment Periods", assessments_path, class: "dropdown-item"%>
-                  <div class="dropdown-divider"></div>
-                <%end%>
-                <% if can? :read, Result %>
-                  <%= link_to  "View Results", results_path, class: "dropdown-item"%>
-                  <div class="dropdown-divider"></div>
-                <%end%>
-                <%= link_to  "Submit Results", results_search_path, class: "dropdown-item"%>
-              </div>
-            </li>
-          </ul>
-          <span class="navbar-text">
-              <% if user_signed_in? %>
-              <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>  
-              (<%= current_user.email %>)   
-              <% end %>
-            </span>
-        </div>
-      </nav>
+            <% if can? :read, Result %>
+              <%= link_to  "View Results", results_path, class: "dropdown-item"%>
+              <div class="dropdown-divider"></div>
+            <%end%>
+            <%= link_to  "Submit Results", results_search_path, class: "dropdown-item"%>
+            <div class="dropdown-divider"></div>
+            <% if can? :send, Result %>
+              <%= link_to  "Send Results", results_choose_period_path, class: "dropdown-item"%>
+            <%end%>
+          </div>
+        </li>
+      </ul>
+      <span class="navbar-text">
+          <% if user_signed_in? %>
+          <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>  
+          (<%= current_user.email %>)   
+          <% end %>
+        </span>
+    </div>
+  </nav>

@@ -34,5 +34,7 @@ Rails.application.routes.draw do
     get 'search'
     get 'edit_all'
     patch 'update_all'
+    get 'choose_period'
+    post 'send_notifications'
   end
 end

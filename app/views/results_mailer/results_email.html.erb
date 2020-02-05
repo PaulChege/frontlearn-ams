@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>Dear <%= @student.full_name %>,</p>
+    <p>Here are your results for the assessments done during the semester starting:  <%= @assessment.full_semester_name %></p>
+    <table>
+      <thead>
+        <th>Unit</th>
+        <th>Mark</th>
+        <th>Grade</th>
+      </thead>
+      <tbody>
+        <% @results.each do |result| %>
+          <tr>
+            <td><%= result.unit.full_unit_name %></td>
+            <td><%= result.final_mark %></td>
+            <td><%= result.final_grade %></td>
+          </tr>
+        <%end%>
+      </tbody>
+    </table>
+  </body>
+</html>

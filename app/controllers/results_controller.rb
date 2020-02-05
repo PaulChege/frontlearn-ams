@@ -44,10 +44,38 @@ class ResultsController < ApplicationController
                 notice: 'Results updated successfully.'
   end
 
+  def choose_period
+    @assessments = Assessment.where(status: 'open')
+  end
+
+  def send_notifications
+    results_by_student = Result.where(assessment_id: send_params[:assessment_id])
+                .where.not(final_grade: nil)
+                .group_by(&:student_id)
+    if results_by_student.empty?
+      redirect_to results_choose_period_path,
+                  notice: 'No Results. There are no final results for the period selected.'
+    else
+      assessment = Assessment.find(send_params[:assessment_id])
+      results_by_student.each do |student_id, results|
+        student = Student.find(student_id)
+        ResultsMailer.with(student: student, results: results, assessment: assessment)
+          .results_email
+          .deliver_later
+      end
+      redirect_to results_choose_period_path,
+          notice: 'Results successfully sent!'
+    end
+  end
+
   private
 
   def search_params
     params.require(:search).permit(:course_id, :unit_id, :intake, :assessment_id)
+  end
+
+  def send_params
+    params.require(:send).permit(:assessment_id)
   end
 
   def find_or_create_results

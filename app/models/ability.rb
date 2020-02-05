@@ -15,6 +15,7 @@ class Ability
         can :crud, Assessment
         can :modify, Student
         can :read, Result
+        can :send, Result
       end
     end
   end
