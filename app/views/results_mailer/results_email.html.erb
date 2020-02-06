@@ -5,22 +5,29 @@
   </head>
   <body>
     <p>Dear <%= @student.full_name %>,</p>
-    <p>Here are your results for the assessments done during the semester starting:  <%= @assessment.full_semester_name %></p>
-    <table>
-      <thead>
-        <th>Unit</th>
-        <th>Mark</th>
-        <th>Grade</th>
+    <p>Here are your results for the assessments done during the semester starting <%= @assessment.full_semester_name %>.</p>
+    <table style="border: 1px solid black; border-style: collapse;">
+      <thead style="background-color: #F36B08;color: white;">
+        <th style="border: 1px solid black; padding: 10px;">Unit</th>
+        <th style="border: 1px solid black; padding: 10px;">Mark</th>
+        <th style="border: 1px solid black; padding: 10px;">Grade</th>
       </thead>
       <tbody>
         <% @results.each do |result| %>
-          <tr>
-            <td><%= result.unit.full_unit_name %></td>
-            <td><%= result.final_mark %></td>
-            <td><%= result.final_grade %></td>
+          <tr style="border: 1px solid black; padding: 10px;">
+            <td style="border: 1px solid black; padding: 10px;"><%= result.unit.full_unit_name %></td>
+            <td style="border: 1px solid black; padding: 10px;"><%= result.final_mark %></td>
+            <td style="border: 1px solid black; padding: 10px;"><%= result.final_grade %></td>
           </tr>
         <%end%>
       </tbody>
     </table>
+    <br/>
+    <p>Kindly contact admin for any queries.</p>
+    <br/>
+    <br/>
+    <img src="https://i.ibb.co/1KPxv6p/FRONTLEARN-LOGO.png" style="display:block" alt="logo" width="60" height="60" />
+    <p>Frontlearn Institute AMS</p>
+    <a href= "www.frontlearn.co.ke">www.frontlearn.co.ke</a>
   </body>
 </html>

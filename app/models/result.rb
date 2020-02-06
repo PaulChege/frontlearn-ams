@@ -26,13 +26,31 @@ class Result < ApplicationRecord
 
   before_update :calculate_final_mark_and_grade
 
+  scope :by_student, -> (assessment_id) {
+      where(assessment_id: assessment_id)
+      .where.not(final_grade: nil)
+      .group_by(&:student_id)
+    }
+
   def calculate_final_mark_and_grade
     if attendance && assignments && cats && practicals && final_exam
       pre_assessments = (attendance + assignments + practicals + cats) / 4
       self.final_mark = (pre_assessments + (final_exam * 0.7)).round(2)
       self.final_grade = calculate_final_grade(final_mark)
+      self
     else
       self.final_mark = nil
+      self
+    end
+  end
+
+  def self.send_email_notifications(assessment_id, results_by_student)
+    assessment = Assessment.find(assessment_id)
+    results_by_student.each do |student_id, results|
+      student = Student.find(student_id)
+      ResultsMailer.with(student: student, results: results, assessment: assessment)
+        .results_email
+        .deliver_later
     end
   end
 

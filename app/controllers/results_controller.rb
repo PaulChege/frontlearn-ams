@@ -49,20 +49,12 @@ class ResultsController < ApplicationController
   end
 
   def send_notifications
-    results_by_student = Result.where(assessment_id: send_params[:assessment_id])
-                .where.not(final_grade: nil)
-                .group_by(&:student_id)
+    results_by_student = Result.by_student(send_params[:assessment_id])
     if results_by_student.empty?
       redirect_to results_choose_period_path,
                   notice: 'No Results. There are no final results for the period selected.'
     else
-      assessment = Assessment.find(send_params[:assessment_id])
-      results_by_student.each do |student_id, results|
-        student = Student.find(student_id)
-        ResultsMailer.with(student: student, results: results, assessment: assessment)
-          .results_email
-          .deliver_later
-      end
+      Result.send_email_notifications(send_params[:assessment_id], results_by_student)
       redirect_to results_choose_period_path,
           notice: 'Results successfully sent!'
     end
