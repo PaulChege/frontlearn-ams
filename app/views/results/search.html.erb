@@ -18,7 +18,7 @@
             <%= f.select :intake, @intakes, class: "form-control" %>
           </div>
 					<div class="form-group">
-            <%= f.label "Exams for semester starting:"%><br />
+            <%= f.label "For semester starting:"%><br />
             <%= collection_select(:search, :assessment_id, @assessments, :id, :full_semester_name) %>
           </div>
 					<%= f.submit "Next", class: "btn btn-primary float-right"%>

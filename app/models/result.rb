@@ -54,7 +54,39 @@ class Result < ApplicationRecord
     end
   end
 
+  def self.find_or_create_by_unit(search_params)
+    students = Student.search_by_course_and_intake(
+      search_params[:course_id].to_i, 
+      search_params[:intake]
+    )
+
+    results = students.map do |student|
+      student.results.find_or_create_by(
+        unit_id: search_params[:unit_id]
+      )
+    end
+
+    return results if results.empty?
+    
+    validate_assessment(
+      results.first.assessment_id,
+      search_params[:assessment_id].to_i,
+      results
+    )
+  end
+
   private
+
+  def self.validate_assessment(results_assessment, selected_assessment, results)
+    if results_assessment == nil
+      results.each do |result|
+        result.update(assessment_id: selected_assessment)
+      end
+    elsif results_assessment != selected_assessment
+      results = []
+    end
+    return results
+  end
 
   def calculate_final_grade(mark)
     if mark < 40

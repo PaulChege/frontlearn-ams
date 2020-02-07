@@ -71,16 +71,6 @@ class ResultsController < ApplicationController
   end
 
   def find_or_create_results
-    students = Student.where(
-      course_id: search_params[:course_id]
-    ).search_by_intake(search_params[:intake])
-
-    @results = students.map do |student|
-      student.results.find_or_create_by(
-        unit_id: search_params[:unit_id],
-        assessment_id: search_params[:assessment_id]
-      )
-    end
-    # TODO -  fix bug with student having the same unit results on 2 semesters
+    @results = Result.find_or_create_by_unit(search_params)
   end
 end
