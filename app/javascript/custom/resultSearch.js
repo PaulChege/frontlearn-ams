@@ -15,14 +15,22 @@ const getUnits = () => {
   $("#search_unit_id").empty();
   $.getJSON(`/courses/${course_dd.value}/units_json`, function(data) {
     data.forEach(unit => {
-      createOption(units_dd, unit.name, unit.id);
+      var urlParams = new URLSearchParams(window.location.search);
+      var selected = false;
+      if (urlParams.has("search[unit_id]")) {
+        if (parseInt(urlParams.get("search[unit_id]")) === unit.id) {
+          selected = true;
+        }
+      }
+      createOption(units_dd, unit.name, unit.id, selected);
     });
   });
 };
 
-const createOption = (units_dd, text, value) => {
+const createOption = (units_dd, text, value, selected) => {
   var opt = document.createElement("option");
   opt.value = value;
   opt.text = text;
+  opt.selected = selected;
   units_dd.options.add(opt);
 };

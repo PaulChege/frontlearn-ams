@@ -81,5 +81,6 @@ class ResultsController < ApplicationController
         assessment_id: search_params[:assessment_id]
       )
     end
+    # TODO -  fix bug with student having the same unit results on 2 semesters
   end
 end
