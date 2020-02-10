@@ -89,18 +89,19 @@ class Result < ApplicationRecord
   end
 
   def calculate_final_grade(mark)
-    if mark < 40
-      'F'
-    elsif mark >= 40 && mark < 50
-      'D'
-    elsif mark >= 50 && mark < 60
-      'C'
-    elsif mark >= 60 && mark < 70
-      'B'
-    elsif mark >= 70
-      'A'
+    case mark
+    when 0..39
+      "F"
+    when 40..49
+      "D"
+    when 50..59
+      "C"
+    when 60..69
+      "B"
+    when 70..100
+      "A"
     else
-      ''
-    end
+      ""
+    end 
   end
 end
