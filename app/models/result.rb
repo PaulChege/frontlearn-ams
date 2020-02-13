@@ -26,22 +26,21 @@ class Result < ApplicationRecord
 
   before_update :calculate_final_mark_and_grade
 
-  scope :by_student, -> (assessment_id) {
-      where(assessment_id: assessment_id)
-      .where.not(final_grade: nil)
-      .group_by(&:student_id)
-    }
+  scope :by_student, lambda { |assessment_id|
+                       where(assessment_id: assessment_id)
+                         .where.not(final_grade: nil)
+                         .group_by(&:student_id)
+                     }
 
   def calculate_final_mark_and_grade
     if attendance && assignments && cats && practicals && final_exam
       pre_assessments = (attendance + assignments + practicals + cats) / 4
       self.final_mark = (pre_assessments + (final_exam * 0.7)).round(2)
       self.final_grade = calculate_final_grade(final_mark)
-      self
     else
       self.final_mark = nil
-      self
     end
+    self
   end
 
   def self.send_email_notifications(assessment_id, results_by_student)
@@ -49,14 +48,14 @@ class Result < ApplicationRecord
     results_by_student.each do |student_id, results|
       student = Student.find(student_id)
       ResultsMailer.with(student: student, results: results, assessment: assessment)
-        .results_email
-        .deliver_later
+                   .results_email
+                   .deliver_later
     end
   end
 
   def self.find_or_create_by_unit(search_params)
     students = Student.search_by_course_and_intake(
-      search_params[:course_id].to_i, 
+      search_params[:course_id].to_i,
       search_params[:intake]
     )
 
@@ -67,7 +66,7 @@ class Result < ApplicationRecord
     end
 
     return results if results.empty?
-    
+
     validate_assessment(
       results.first.assessment_id,
       search_params[:assessment_id].to_i,
@@ -78,30 +77,30 @@ class Result < ApplicationRecord
   private
 
   def self.validate_assessment(results_assessment, selected_assessment, results)
-    if results_assessment == nil
+    if results_assessment.nil?
       results.each do |result|
         result.update(assessment_id: selected_assessment)
       end
     elsif results_assessment != selected_assessment
       results = []
     end
-    return results
+    results
   end
 
   def calculate_final_grade(mark)
     case mark
     when 0..39
-      "F"
+      'F'
     when 40..49
-      "D"
+      'D'
     when 50..59
-      "C"
+      'C'
     when 60..69
-      "B"
+      'B'
     when 70..100
-      "A"
+      'A'
     else
-      ""
-    end 
+      ''
+    end
   end
 end

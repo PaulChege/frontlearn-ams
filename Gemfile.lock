@@ -1,4 +1,12 @@
 GIT
+  remote: https://github.com/faker-ruby/faker.git
+  revision: 4a0d6c54a8bf9929f6d816631cf749cc019cb13f
+  branch: master
+  specs:
+    faker (2.10.1)
+      i18n (>= 1.6, < 2)
+
+GIT
   remote: https://github.com/rspec/rspec-core.git
   revision: da87aa0c5f25a6e6f2db6f0c8fb2a04625b80ac6
   branch: master
@@ -320,6 +328,7 @@ DEPENDENCIES
   devise
   dotenv-rails
   factory_bot_rails
+  faker!
   font_awesome5_rails
   jbuilder (~> 2.7)
   listen (>= 3.0.5, < 3.2)

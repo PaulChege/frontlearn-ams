@@ -113,14 +113,14 @@ Rails.application.configure do
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
 
   config.action_mailer.delivery_method = :smtp
-  host = ENV["APPLICATION_HOST"]
+  host = ENV['APPLICATION_HOST']
   config.action_mailer.default_url_options = { host: host, protocol: 'http' }
   config.action_mailer.smtp_settings = {
-    :address              => ENV["SMTP_ADDRESS"],
-    :port                 => 587,
-    :user_name            => ENV["SMTP_USERNAME"],
-    :password             => ENV["SMTP_PASSWORD"],
-    :authentication       => "plain",
-    :enable_starttls_auto => true
+    address: ENV['SMTP_ADDRESS'],
+    port: 587,
+    user_name: ENV['SMTP_USERNAME'],
+    password: ENV['SMTP_PASSWORD'],
+    authentication: 'plain',
+    enable_starttls_auto: true
   }
 end

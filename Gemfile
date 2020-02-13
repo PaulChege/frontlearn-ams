@@ -55,13 +55,16 @@ group :test do
 
   # Adds RSpec related gems
   %w[rspec-core rspec-expectations rspec-mocks rspec-rails rspec-support].each do |lib|
-    gem lib, git: "https://github.com/rspec/#{lib}.git", branch: 'master' 
+    gem lib, git: "https://github.com/rspec/#{lib}.git", branch: 'master'
   end
 
   # Adds Factory Bot for test objects in RSpec
-  gem "factory_bot_rails"
+  gem 'factory_bot_rails'
 
   gem 'rails-controller-testing'
+
+  # Generates fake data for tests
+  gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -82,5 +85,4 @@ gem 'font_awesome5_rails'
 # Ruby code linting
 gem 'rubocop', require: false
 
-gem 'dotenv-rails', groups: [:development, :test]
-
+gem 'dotenv-rails', groups: %i[development test]

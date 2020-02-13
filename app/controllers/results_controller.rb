@@ -56,7 +56,7 @@ class ResultsController < ApplicationController
     else
       Result.send_email_notifications(send_params[:assessment_id], results_by_student)
       redirect_to results_choose_period_path,
-          notice: 'Results successfully sent!'
+                  notice: 'Results successfully sent!'
     end
   end
 
