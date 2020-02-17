@@ -32,15 +32,16 @@ RSpec.describe UsersController, type: :controller do
 
   describe 'POST #create' do
     let(:create_request) { post :create, params: valid_attributes }
-    it 'shoudld redirect after creating a new user with valid attributes' do
-      create_request
-      expect(response).to redirect_to(users_path)
-      expect(flash[:notice]).to be_present
-    end
 
     it 'should add user record after creating user with valid attributes' do
       valid_attributes
       expect { create_request }.to change(User, :count)
+    end
+
+    it 'shoudld redirect after creating a new user with valid attributes' do
+      create_request
+      expect(response).to redirect_to(users_path)
+      expect(flash[:notice]).to be_present
     end
 
     it 'should raise error when creating user with invalid attributes' do

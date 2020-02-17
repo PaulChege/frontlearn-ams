@@ -26,6 +26,13 @@ RSpec.describe Courses::UnitsController, type: :controller do
     end
   end
 
+  describe 'GET #units_json' do
+    it 'should return units for course' do
+      get :units_json, params: { id: course.id }, format: :json
+      expect(response).to be_successful
+    end
+  end
+
   describe 'POST #create' do
     let(:create_request) { post :create, params: valid_attributes }
     it 'shoudld redirect when creating new unit with valid attributes' do
