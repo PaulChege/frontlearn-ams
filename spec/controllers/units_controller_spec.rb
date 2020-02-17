@@ -43,16 +43,11 @@ RSpec.describe UnitsController, type: :controller do
         id: unit.id
       }
     end
-
-    it 'should redirect after deleting a unit' do
-      delete_request
-      expect(response).to redirect_to(units_path)
-      expect(flash[:notice]).to be_present
-    end
-
-    it 'should remove unit record' do
+    it 'should remove unit record and redirect' do
       unit
       expect { delete_request }.to change(Unit, :count)
+      expect(response).to redirect_to(units_path)
+      expect(flash[:notice]).to be_present
     end
   end
 end

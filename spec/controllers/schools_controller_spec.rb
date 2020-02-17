@@ -39,14 +39,12 @@ RSpec.describe SchoolsController, type: :controller do
 
   describe 'DELETE #destroy' do
     let(:delete_request) { delete :destroy, params: { id: school.id } }
-    it 'should redirect after deleting a school' do
-      delete_request
-      expect(response).to redirect_to(schools_path)
-      expect(flash[:notice]).to be_present
-    end
-    it 'should remove school record' do
+
+    it 'should remove school record and redirect' do
       school
       expect { delete_request }.to change(School, :count)
+      expect(response).to redirect_to(schools_path)
+      expect(flash[:notice]).to be_present
     end
   end
 end

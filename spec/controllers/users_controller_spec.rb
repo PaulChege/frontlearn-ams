@@ -31,15 +31,8 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe 'POST #create' do
-    let(:create_request) { post :create, params: valid_attributes }
-
-    it 'should add user record after creating user with valid attributes' do
-      valid_attributes
-      expect { create_request }.to change(User, :count)
-    end
-
-    it 'shoudld redirect after creating a new user with valid attributes' do
-      create_request
+    it 'should add user record after creating user with valid attributes and redirect' do
+      expect { post :create, params: valid_attributes }.to change(User, :count)
       expect(response).to redirect_to(users_path)
       expect(flash[:notice]).to be_present
     end
@@ -72,14 +65,12 @@ RSpec.describe UsersController, type: :controller do
 
   describe 'DELETE #destroy' do
     let(:delete_request) { delete :destroy, params: { id: user.id } }
-    it 'should redirect after deleting a user' do
-      delete_request
-      expect(response).to redirect_to(users_path)
-      expect(flash[:notice]).to be_present
-    end
-    it 'should remove user record' do
+
+    it 'should remove user record and redirect' do
       user
       expect { delete_request }.to change(User, :count)
+      expect(response).to redirect_to(users_path)
+      expect(flash[:notice]).to be_present
     end
   end
 end

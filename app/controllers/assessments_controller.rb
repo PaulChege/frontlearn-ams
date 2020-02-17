@@ -9,14 +9,13 @@ class AssessmentsController < ApplicationController
     @assessment = Assessment.new
   end
 
-  def change_status; end
-
   def create
     @assessment = Assessment.new(assessment_params)
     @assessment.status = 'open'
     if @assessment.save
       redirect_to assessments_path, notice: 'Assessment period created successfully.'
     else
+      @assessments = Assessment.all
       render :index
     end
   end
@@ -27,7 +26,7 @@ class AssessmentsController < ApplicationController
   end
 
   def destroy
-    @assessment.delete
+    @assessment.destroy
     redirect_to assessments_path, notice: 'Assessment period removed successfully.'
   end
 

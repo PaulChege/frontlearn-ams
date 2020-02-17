@@ -34,16 +34,12 @@ RSpec.describe Courses::UnitsController, type: :controller do
   end
 
   describe 'POST #create' do
-    let(:create_request) { post :create, params: valid_attributes }
-    it 'shoudld redirect when creating new unit with valid attributes' do
-      create_request
+    it 'shoudld create new unit with valid attributes and add to course and redirect' do
+      expect { post :create, params: valid_attributes }.to(
+        change(Unit, :count) && change(CourseUnit, :count)
+      )
       expect(response).to redirect_to(school_course_units_path(course.school, course))
       expect(flash[:notice]).to be_present
-    end
-
-    it 'shoudld create new unit with valid attributes and add to course' do
-      course
-      expect { create_request }.to change(Unit, :count) && change(CourseUnit, :count)
     end
 
     it 'should raise error when creating unit with invalid attributes' do
@@ -101,14 +97,10 @@ RSpec.describe Courses::UnitsController, type: :controller do
       }
     end
 
-    it 'should remove unit record from course but not delete unit' do
+    it 'should remove unit record from course but not delete unit and redirect' do
       course_unit
       expect { delete_request }.to change(CourseUnit, :count)
       expect { delete_request }.not_to change(Unit, :count)
-    end
-
-    it 'should redirect after deleting a unit' do
-      delete_request
       expect(response).to redirect_to(school_course_units_path(
                                         course_unit.course.school,
                                         course_unit.course

@@ -33,15 +33,8 @@ RSpec.describe StudentsController, type: :controller do
   end
 
   describe 'POST #create' do
-    let(:create_request) { post :create, params: valid_attributes }
-
-    it 'should add student record after creating user with valid attributes' do
-      valid_attributes
-      expect { create_request }.to change(Student, :count)
-    end
-
-    it 'shoudld redirect after creating a new student with valid attributes' do
-      create_request
+    it 'should add student record after creating user with valid attributes and redirect' do
+      expect { post :create, params: valid_attributes }.to change(Student, :count)
       expect(response).to redirect_to(students_path)
       expect(flash[:notice]).to be_present
     end
@@ -74,14 +67,11 @@ RSpec.describe StudentsController, type: :controller do
 
   describe 'DELETE #destroy' do
     let(:delete_request) { delete :destroy, params: { id: student.id } }
-    it 'should redirect after deleting a student' do
-      delete_request
-      expect(response).to redirect_to(students_path)
-      expect(flash[:notice]).to be_present
-    end
-    it 'should remove user record' do
+    it 'should remove user record and redirect' do
       student
       expect { delete_request }.to change(Student, :count)
+      expect(response).to redirect_to(students_path)
+      expect(flash[:notice]).to be_present
     end
   end
 end

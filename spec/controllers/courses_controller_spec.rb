@@ -74,15 +74,11 @@ RSpec.describe CoursesController, type: :controller do
       }
     end
 
-    it 'should redirect after deleting a course' do
-      delete_request
-      expect(response).to redirect_to(school_courses_path)
-      expect(flash[:notice]).to be_present
-    end
-
-    it 'should remove course record' do
+    it 'should remove course record and redirect' do
       course
       expect { delete_request }.to change(Course, :count)
+      expect(response).to redirect_to(school_courses_path)
+      expect(flash[:notice]).to be_present
     end
   end
 end
