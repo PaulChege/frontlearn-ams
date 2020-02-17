@@ -25,7 +25,7 @@ class CoursesController < ApplicationController
 
   def update
     @course.assign_attributes(course_params)
-    if @course.save!
+    if @course.save
       redirect_to school_courses_path, notice: 'Course updated successfully.'
     else
       render :edit
