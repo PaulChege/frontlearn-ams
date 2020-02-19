@@ -30,12 +30,8 @@ jobs:
       - run: bundle install --path vendor/bundle
       # Database setup
       - run: bundle exec rake db:create db:schema:load
-      - run:
-          name: Run rubocop in parallel
-          command: bundle exec rubocop --parallel
-      - run:
-          name: Run rspec in parallel
-          command: bundle exec rspec
+
+      - run: bundle exec rspec
 
       # Save artifacts
       - store_test_results:
