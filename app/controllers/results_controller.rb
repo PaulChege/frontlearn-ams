@@ -38,7 +38,7 @@ class ResultsController < ApplicationController
     @redirect_params = { 'search' => search_params }
   end
 
-  def update
+  def update_all
     Result.update(params[:results].keys, params[:results].values)
     redirect_to results_edit_all_path('search' => search_params),
                 notice: 'Results updated successfully.'

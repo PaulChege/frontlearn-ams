@@ -89,13 +89,13 @@ class Result < ApplicationRecord
 
   def calculate_final_grade(mark)
     case mark
-    when 0..39
+    when 0..39.99
       'F'
-    when 40..49
+    when 40..49.99
       'D'
-    when 50..59
+    when 50..59.99
       'C'
-    when 60..69
+    when 60..69.99
       'B'
     when 70..100
       'A'
