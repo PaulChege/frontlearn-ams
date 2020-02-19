@@ -9,9 +9,9 @@ workflows:
       - heroku/deploy-via-git: # Use the pre-configured job, deploy-via-git
           requires:
             - build
-          filters:
-            branches:
-              only: sequential-branch-filter
+          # filters:
+          #   branches:
+          #     only: sequential-branch-filter
 jobs:
   build:
     docker:
@@ -30,9 +30,9 @@ jobs:
       - run: bundle install --path vendor/bundle
       # Database setup
       - run: bundle exec rake db:create db:schema:load
-      - run:
-          name: Run rubocop in parallel
-          command: bundle exec rubocop --parallel --config .rubocop.yml
+      # - run:
+      #     name: Run rubocop in parallel
+      #     command: bundle exec rubocop --parallel --config .rubocop.yml
       - run:
           name: Run rspec in parallel
           command: |
