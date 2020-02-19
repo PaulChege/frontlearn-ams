@@ -1,0 +1,42 @@
+version: 2.1
+orbs:
+  heroku: circleci/heroku@1.0.1 # Invoke the Heroku orb
+
+workflows:
+  heroku_deploy:
+    jobs:
+      - build
+      - heroku/deploy-via-git: # Use the pre-configured job, deploy-via-git
+          requires:
+            - build
+          # filters:
+          #   branches:
+          #     only: sequential-branch-filter
+jobs:
+  build:
+    docker:
+      - image: circleci/ruby:2.6.5-node-browsers
+        environment:
+          BUNDLE_RETRY: 3
+          BUNDLE_PATH: vendor/bundle
+          DATABASE_URL: postgres://postgres:password@localhost:5432/frontlearn-ams_test
+          RAILS_ENV: test
+      - image: circleci/postgres:11.5-alpine
+    working_directory: ~/circleci-demo-workflows
+    steps:
+      - checkout
+      - run: dockerize -wait tcp://127.0.0.1:5432 -timeout 1m
+      # Bundle install dependencies
+      - run: bundle install --path vendor/bundle
+      # Database setup
+      - run: bundle exec rake db:create db:schema:load
+      # - run:
+      #     name: Run rubocop in parallel
+      #     command: bundle exec rubocop --parallel --config .rubocop.yml
+      - run:
+          name: Run rspec in parallel
+          command: bundle exec rspec
+
+      # Save artifacts
+      - store_test_results:
+          path: /tmp/test-results
