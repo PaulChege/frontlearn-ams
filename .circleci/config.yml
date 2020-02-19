@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-    heroku: circleci/heroku@1.0.1 # Invoke the Heroku orb
+  heroku: circleci/heroku@1.0.1 # Invoke the Heroku orb
 
 workflows:
   heroku_deploy:
@@ -16,10 +16,19 @@ jobs:
   build:
     docker:
       - image: circleci/ruby:2.6.5-node-browsers
+        environment:
+          BUNDLE_RETRY: 3
+          BUNDLE_PATH: vendor/bundle
+          DATABASE_URL: postgres://postgres:password@localhost:5432/frontlearn-ams_test
+          RAILS_ENV: test
       - image: circleci/postgres:11.5-alpine
     working_directory: ~/circleci-demo-workflows
     steps:
       - checkout
+      - run:
+        name: Wait for DB
+        command: dockerize -wait tcp://127.0.0.1:5432 -timeout 1m
+
       # Bundle install dependencies
       - run: bundle install --path vendor/bundle
       # Database setup
