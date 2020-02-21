@@ -1,7 +1,7 @@
 <div class="container">
   <div class="card col-sm-5 mx-auto">
     <div class="card-body">
-      <h2 class="text-center">Log in</h2>
+      <h4 class="text-center">Log in</h4>
       <br/>
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <div class="form-group">
@@ -13,7 +13,9 @@
           <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
         </div>
         <br/>
-        <%= f.submit "Log in" , class: "btn btn-primary float-right"%>
+        <%= button_tag(:class => "btn btn-primary float-right") do %>
+          <i class='fas fa-sign-in-alt'></i> Log in
+        <% end %>
       <% end %>
       <div>
       </div>

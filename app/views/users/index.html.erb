@@ -1,7 +1,10 @@
 <div class="container">
-	<h4>Users</h4>
+	<h4><i class='far fa-user'></i>Users</h4>
 	<div class="float-right">
-			<%= link_to "Add User", new_user_path, :class => "btn btn-outline-primary btn-sm"%>
+			<%= link_to new_user_path, 
+				:class => "btn btn-outline-primary btn-sm" do %>
+				<i class="fas fa-user-plus"></i> Add User
+			<%end%>
 	</div>
 	<br/>
 	<br/>
@@ -26,15 +29,19 @@
 							</td>
 							
 							<td>
-									<%= link_to "Edit", edit_user_path(user), 
-										:class => "btn btn-sm btn-outline-primary mx-sm-2"%>
+									<%= link_to edit_user_path(user), 
+										:class => "btn btn-sm btn-outline-primary mx-sm-2" do %>
+										<i class="far fa-edit"></i> Edit
+									<%end%>
 									<% if user != current_user %>
-									<%= link_to "Delete", user_path(user), 
-										method: :delete, 
-										data: { 
-											confirm_swal: "Are you sure you want to delete user - #{user.full_name} ?"
-										}, 
-										:class => "btn btn-sm btn-outline-danger"%>
+										<%= link_to user_path(user), 
+											method: :delete, 
+											data: { 
+												confirm_swal: "Are you sure you want to delete user - #{user.full_name} ?"
+											}, 
+											:class => "btn btn-sm btn-outline-danger" do %>
+											<i class="far fa-trash-alt"></i>Delete
+										<%end%>
 									<%end%>
 							</td>
 					</tr>

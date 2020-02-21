@@ -1,7 +1,8 @@
 <div class="container">
   <div class = "card col-sm-6 mx-auto">
     <div class="card-body">
-    <h2>Edit User</h2>
+    <h4 class="text-center">Edit User</h4>
+    <br/>
     <%= render "shared/error_messages", resource: @user %>
     <%= form_for @user, url: user_path(@user), method: :patch do |f| %>
     <div class="form-group">
@@ -20,7 +21,10 @@
           <%end%>
         <% end %>      
       </div>
-      <%= f.submit "Save", class: "btn btn-primary"%>
+      <br/>
+       <%= button_tag(:class => "btn btn-primary float-right") do %>
+          <i class='fas fa-save'></i> Save
+        <% end %>
     <% end %>
     </div>
   </div>
