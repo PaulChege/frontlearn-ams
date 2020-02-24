@@ -1,19 +1,28 @@
 <div class="container">
-	<h4>Send Results</h4>
+	<h4><i class="fas fa-paper-plane"></i> Send Results</h4>
 	<br/>
 	<div class="card col-sm-6 mx-auto">
-			<div class="card-body">
-				<%= form_for :send, url: results_send_notifications_path, method: :post do |f| %> 
-					<div class="form-group">
-            <%= f.label "Exams for semester starting:"%><br />
-            <%= collection_select(:send, :assessment_id, @assessments, :id, :full_semester_name) %>
-          </div>
-          <%= f.submit "Send Results", 
-            data: {
-              confirm_swal: "Are you sure you want to send notifications for the selected assessment period ?"
-              },
-            class: "btn btn-primary float-right"%>
-				<% end %>
-      </div>
+    <div class="card-body">
+      <%= form_for :send, url: results_send_notifications_path, method: :post do |f| %> 
+        <div class="form-group">
+          <%= f.label "Exams for semester starting:"%><br />
+          <%= collection_select(:send, :assessment_id, @assessments, :id, :full_semester_name) %>
+        </div>
+        <p>
+          <small>
+            <em>
+              Results will be sent via email to all students in the assessment period chosen.
+            </em>
+          </small>
+        </p>
+        <%= button_tag(
+          :class => "btn btn-primary float-right",
+          :data => {
+            confirm_swal: "Are you sure you want to send notifications for the selected assessment period ?"
+          }) do %>
+          <i class='far fa-paper-plane'></i> Send
+        <% end %>
+      <% end %>
+    </div>
   </div>
 </div>

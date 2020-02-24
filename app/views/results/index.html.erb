@@ -1,23 +1,24 @@
 <div class="container">
-	<h4>View Assessment Results</h4>
+	<h4><i class="far fa-file-alt"></i> View Assessment Results</h4>
   <br/>
   <div class="card">
     <div class="card-body">
   	<%= form_for :search, url: results_path, method: :get, html: {class: "form-inline"} do |f| %>
-      <div class="form-group">
-        <%= f.label "Course:", class: "mx-sm-3" %><br />
-        <%= collection_select(
-          :search, :course_id, @courses, :id, :full_course_name, {:prompt => true, :selected=> @params.present? ? @params[:course_id] : ""})%>
-      </div>
-      <div class="form-group">
-        <%= f.label "Unit assessed:", class: "mx-sm-3" %><br />
-        <%= f.select :unit_id, [], :selected=> @params.present? ?  @params[:unit_id] : "", class: "form-control" %>
-      </div>
-      <div class="form-group">
-        <%= f.label "For semester starting:", class: "mx-sm-3"%><br />
-        <%= collection_select(:search, :assessment_id, @assessments, :id, :full_semester_name, {:selected=> @params.present? ? @params[:assessment_id] : ""}) %>
-      </div>
-      <%= f.submit "Search", class: "btn btn-primary mx-sm-3"%>
+        <div class="form-group mx-sm-3">
+          <%= collection_select(
+            :search, :course_id, @courses, :id, :full_course_name, 
+            {:prompt => "Select Course", :selected=> @params.present? ? @params[:course_id] : ""})%>
+        </div>
+        <div class="form-group mx-sm-3">
+          <%= f.select :unit_id, [], :selected=> @params.present? ?  @params[:unit_id] : "", class: "form-control", :include_blank => true %>
+        </div>
+        <div class="form-group mx-sm-3">
+          <%= collection_select(:search, :assessment_id, @assessments, :id, :full_semester_name, {:prompt => "Select Assessment", :selected=> @params.present? ? @params[:assessment_id] : ""}) %>
+        </div>
+      <br/>
+        <%= button_tag(:class => "btn btn-primary mx-sm-3 ") do %>
+          <i class='fas fa-search'></i> Search
+        <% end %>
 		<% end %>
   </div>
   </div>

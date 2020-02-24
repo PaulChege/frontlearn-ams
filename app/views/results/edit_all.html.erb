@@ -1,10 +1,13 @@
 <div class="container">
-	<h4>Edit Assessment</h4>
-  <h6><%= @course.full_course_name + " | " + @unit.full_unit_name %></h6>
-  <%= "Intake: " + @intake + " | " + "Semester starting: " + @assessment.full_semester_name %>
+	<h4><i class="far fa-file-alt"></i> Submit Results</h4>
+  <br/>
+  <h6><%= @course.full_course_name + " / " + @unit.full_unit_name %></h6>
+  <%= "Intake: " + @intake + " / " + "Semester starting: " + @assessment.full_semester_name %>
 	<br/>
   <%= form_tag results_update_all_path(@redirect_params), method: :patch do %>
-    <%= submit_tag "Save ", class: "btn btn-primary float-right"%>
+    <%= button_tag(:class => "btn btn-primary float-right") do %>
+      <i class='far fa-save'></i> Save
+    <% end %>
     <br/>
     <br/>
     <table class="table table-bordered table-responsive-sm table-sm">

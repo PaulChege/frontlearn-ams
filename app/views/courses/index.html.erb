@@ -1,5 +1,5 @@
 <div class="container">
-	<h4><i class='fas fa-school'></i>School of <%=@school.name%></h4>
+	<h4><i class='fas fa-school'></i> School of <%=@school.name%></h4>
 	<div class="float-right">
 		<%= link_to new_school_course_path(@school), 
 			:class => "btn btn-sm btn-outline-primary" do %>
@@ -21,7 +21,7 @@
 					<% end %>
 					<%= link_to school_course_units_path(@school, course), 
 						:class => "btn btn-sm btn-outline-info mx-sm-2" do %>
-						<i class='far fa-file-alt'></i> Units
+						<i class='fas fa-book-open'></i> Units(<%= course.units.count %>)
 					<% end %>
 					<%= link_to school_course_path(@school, course), 
 						method: :delete,

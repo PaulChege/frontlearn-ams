@@ -1,11 +1,11 @@
 <div class="container">
-	<h4>Assessment Periods</h4>
+	<h4><i class="far fa-file-alt"></i> Assessment Periods</h4>
 	<br/>
 	<br/>
 	<div class="card">
 			<div class="card-body">
 				<%= render "shared/error_messages", resource: @assessment %>
-				<h6>Create Assessment Period</h6>
+				<h5>Create Assessment Period:</h5>
 				<br/>
 				<%= form_for @assessment, url: assessments_path, html: {class: "form-inline"} do |f| %>
 					<div class="form-group mb-2 ">
@@ -14,14 +14,16 @@
             <%= f.select :semester_month, Student.intake_months.keys.to_a, class: "form-control" %>
             <%= f.select :semester_year, Student.get_intake_year_options, class: "form-control" %>
           </div>
-					<%= f.submit "Create", class: "btn btn-primary mx-sm-3 mb-2 btn-sm"%>
+					 <%= button_tag(:class => "btn btn-primary btn-sm mx-sm-3 mb-2") do %>
+						<i class='fas fa-plus'></i> Create
+					<% end %>
 				<% end %>
 		</div>
 	</div>
 	<br/>
 	<table class="table table-bordered table-responsive-sm table-sm col-sm-6">
 		<thead class="thead-light">
-			<th>Semester starting</th>
+			<th>Semester starting:</th>
 			<th>Status</th>
 			<th></th>
 		</thead>
@@ -40,19 +42,36 @@
 					</td>
 					<td>
 					<%if assessment.open?%>
-							<%= link_to "Close", assessment_path(assessment), 
-								method: :patch, :class => "btn btn-sm btn-outline-warning mx-sm-2" %>
+							<%= link_to assessment_path(assessment), 
+								method: :patch, 
+								data: { 
+								confirm_swal:
+								 "Are you sure you want to close assessment period - #{assessment.full_semester_name} ?"
+								}, 
+								
+								:class => "btn btn-sm btn-outline-warning mx-sm-2" do %>
+								<i class='far fa-times-circle'></i> Close
+							<% end %>
 					<%else%>
-							<%= link_to "Open", assessment_path(assessment), 
-								method: :patch, :class => "btn btn-sm btn-outline-success mx-sm-2" %>
+							<%= link_to assessment_path(assessment), 
+								method: :patch, 
+								data: { 
+									confirm_swal:
+									"Are you sure you want to open assessment period - #{assessment.full_semester_name} ?"
+								}, 
+								:class => "btn btn-sm btn-outline-success mx-sm-2" do %>
+								<i class='far fa-folder-open'></i> Open
+							<% end %>
 					<%end%>
-						<%= link_to "Remove", assessment_path(assessment), 
+						<%= link_to assessment_path(assessment), 
 							method: :delete,
 							data: { 
 								confirm_swal:
 								 "Are you sure you want to delete assessment period - #{assessment.full_semester_name} ?"
 							},  
-							:class => "btn btn-sm btn-outline-danger" %>
+							:class => "btn btn-sm btn-outline-danger" do %>
+								<i class='far fa-trash-alt'></i> Delete
+							<% end %>
 					</td>
 				</tr>
 			<% end%>

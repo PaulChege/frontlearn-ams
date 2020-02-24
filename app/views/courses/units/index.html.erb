@@ -1,36 +1,45 @@
 <div class="container">
-	<h4>Units for <%=@course.full_course_name%></h4>
+	<h4><i class='fas fa-book-open'></i> Units for <%=@course.full_course_name%></h4>
 	<br/>
 	<div class="float-right">
-      <%= link_to  "Manage All Units", units_path, :class => "btn btn-outline-primary btn-sm"%>
+			<%= link_to units_path, 
+				:class => "btn btn-outline-primary btn-sm" do %>
+				<i class='fas fa-book-open'></i> Mangae All Units
+			<% end %>
 	</div>
 	<br/>
 	<br/>
 	<div class="card">
-			<div class="card-body">
-				<%= render "shared/error_messages", resource: @unit %>
-				<h6>Add Existing Unit to Course</h6>
-				<%= form_for @course, url: school_course_add_unit_path(@school, @course), html: {class: "form-inline"}, method: :post do |f| %>
-					<div class="form-group mb-2">
-						<%= f.label "Unit", class: "mx-sm-3" %>
-						<%= collection_select(:unit, :id, Unit.all, :id, :full_unit_name) %>
-					</div>
-					<%= f.submit "Add", class: "btn btn-primary mx-sm-3 mb-2"%>
+		<div class="card-body">
+			<%= render "shared/error_messages", resource: @unit %>
+			<h5>Add Existing Unit to Course:</h5>
+			<br/>
+			<%= form_for @course, url: school_course_add_unit_path(@school, @course), html: {class: "form-inline"}, method: :post do |f| %>
+				<div class="form-group mb-2">
+					<%= f.label "Unit", class: "mx-sm-3" %>
+					<%= collection_select(:unit, :id, Unit.all, :id, :full_unit_name) %>
+				</div>
+				<%= button_tag(:class => "btn btn-primary mx-sm-3 mb-2") do %>
+					<i class='fas fa-plus'></i> Add
 				<% end %>
-				<br/>
-				<h6>Create Unit and Add to Course</h6>
-				<br/>
-				<%= form_for @unit, url: school_course_units_path(@school, @course), html: {class: "form-inline"} do |f| %>
-					<div class="form-group mb-2">
-							<%= f.label :code, class: "mx-sm-3"%>
-							<%= f.text_field :code, autofocus: true, autocomplete: "name", class: "form-control" %>
-					</div>
-					<div class="form-group mx-sm-3 mb-2">
-							<%= f.label :name, class: "mx-sm-3" %>
-							<%= f.text_field :name, autocomplete: "name" ,class: "form-control" %>
-					</div>
-					<%= f.submit "Add", class: "btn btn-primary mb-2"%>
+			<% end %>
+			<br/>
+			<br/>
+			<h5>Create New Unit and Add to Course:</h5>
+			<br/>
+			<%= form_for @unit, url: school_course_units_path(@school, @course), html: {class: "form-inline"} do |f| %>
+				<div class="form-group mb-2">
+						<%= f.label :code, class: "mx-sm-3"%>
+						<%= f.text_field :code, autofocus: true, autocomplete: "name", class: "form-control" %>
+				</div>
+				<div class="form-group mx-sm-3 mb-2">
+						<%= f.label :name, class: "mx-sm-3" %>
+						<%= f.text_field :name, autocomplete: "name" ,class: "form-control" %>
+				</div>
+				<%= button_tag(:class => "btn btn-primary mb-2") do %>
+					<i class='fas fa-plus'></i> Add
 				<% end %>
+			<% end %>
 		</div>
 	</div>
 	<br/>
@@ -46,15 +55,16 @@
 					<td><%= unit.code%></td>
 					<td><%= unit.name%></td>
 					<td>
-						<%= link_to "Remove", 
-							school_course_unit_path(@school, @course, unit), 
+						<%= link_to school_course_unit_path(@school, @course, unit), 
 							method: :delete, 
 							data: { 
 									confirm_swal: "Are you sure you want to remove #{unit.name} from #{@course.full_course_name}?"
 							}, 
-							:class => "btn btn-sm btn-outline-danger" %>
+							:class => "btn btn-sm btn-outline-danger" do %>
+								<i class='far fa-trash-alt'></i> Remove
+							<% end %>
 					</td>
-				</tr>
+				</tr> 
 			<% end%>
 		<tbody>
 	<table>
