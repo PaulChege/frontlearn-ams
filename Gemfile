@@ -85,4 +85,8 @@ gem 'font_awesome5_rails'
 # Ruby code linting
 gem 'rubocop', require: false
 
+# Handles .env environment variables
 gem 'dotenv-rails', groups: %i[development test]
+
+# Pagination
+gem 'will_paginate', '~> 3.1.1'

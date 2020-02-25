@@ -5,7 +5,7 @@ class StudentsController < ApplicationController
   before_action :authorize, except: :index
 
   def index
-    @students = Student.all
+    @students = Student.all.page(params[:page])
   end
 
   def new

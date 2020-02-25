@@ -22,11 +22,14 @@ class Student < ApplicationRecord
   belongs_to :course
   has_many :results, dependent: :delete_all
 
-  scope :search_by_course_and_intake, lambda { |course_id, intake|
-                                        select { |s| s.intake == intake && s.course_id == course_id }
-                                      }
+  scope :search_by_course_and_intake,
+        lambda { |course_id, intake|
+          select { |s| s.intake == intake && s.course_id == course_id }
+        }
 
   enum intake_month: %w[Jan Apr Jul Oct]
+
+  self.per_page = 2
 
   def get_admission_no
     id.to_s.rjust(4, '0')
