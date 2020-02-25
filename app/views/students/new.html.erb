@@ -1,7 +1,8 @@
 <div class="container">
   <div class = "card col-sm-6 mx-auto">
     <div class="card-body">
-    <h2>Add Student</h2>
+    <h4 class="text-center">Add Student</h4>
+    <br/>
     <%= render "shared/error_messages", resource: @student %>
     <%= form_for @student, url: students_path do |f| %>
     	<div class="form-group">
@@ -29,7 +30,10 @@
         <%= f.label :mobile_number %><br />
         <%= f.text_field :mobile_number, autofocus: true, autocomplete: "mobile_number" ,class: "form-control" %>
       </div>
-        <%= f.submit "Add Student", class: "btn btn-primary"%>
+      <br/>
+      <%= button_tag(:class => "btn btn-primary float-right") do %>
+        <i class='fas fa-plus'></i> Add Student
+      <% end %>
     <% end %>
     </div>
   </div>

@@ -29,7 +29,7 @@ class Student < ApplicationRecord
 
   enum intake_month: %w[Jan Apr Jul Oct]
 
-  self.per_page = 2
+  self.per_page = 10
 
   def get_admission_no
     id.to_s.rjust(4, '0')
