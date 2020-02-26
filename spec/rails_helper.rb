@@ -12,6 +12,7 @@ require 'rspec/rails'
 
 require 'devise'
 require_relative 'support/controller_macros'
+require_relative 'support/feature_macros'
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -68,4 +69,5 @@ RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include FactoryBot::Syntax::Methods
   config.extend ControllerMacros, type: :controller
+  config.extend FeatureMacros, type: :feature
 end
