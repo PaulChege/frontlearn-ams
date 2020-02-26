@@ -28,6 +28,13 @@ jobs:
       - run: dockerize -wait tcp://127.0.0.1:5432 -timeout 1m
       # Bundle install dependencies
       - run: bundle install --path vendor/bundle
+      # Webpack
+      - run:
+        name: webpacker
+        command: bundle exec rails webpacker:compile
+      - run:
+          name: Yarn Install
+          command: yarn install --cache-folder ~/.cache/yarn
       # Database setup
       - run: bundle exec rake db:create db:schema:load
 
