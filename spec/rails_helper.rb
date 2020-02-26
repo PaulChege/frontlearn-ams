@@ -11,6 +11,9 @@ end
 require 'rspec/rails'
 
 require 'devise'
+
+require 'capybara/rails'
+
 require_relative 'support/controller_macros'
 require_relative 'support/feature_macros'
 
