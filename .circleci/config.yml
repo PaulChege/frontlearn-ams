@@ -30,8 +30,8 @@ jobs:
       - run: bundle install --path vendor/bundle
       # Webpack
       - run:
-        name: webpacker
-        command: bundle exec rails webpacker:compile
+          name: webpacker
+          command: bundle exec rails webpacker:compile
       - run:
           name: Yarn Install
           command: yarn install --cache-folder ~/.cache/yarn
