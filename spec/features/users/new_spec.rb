@@ -5,8 +5,11 @@ require 'rails_helper'
 RSpec.describe 'creating a user', type: :feature do
   login_user
 
-  scenario 'with valid attributes' do
+  before(:each) do
     visit new_user_path
+  end
+
+  scenario 'with valid attributes' do
     full_name = 'Test User'
     fill_in 'Full name', with: full_name
     fill_in 'Email', with: 'test@email.com'
@@ -18,7 +21,6 @@ RSpec.describe 'creating a user', type: :feature do
   end
 
   scenario 'with invalid attributes' do
-    visit new_user_path
     full_name = 'Test User'
     fill_in 'Full name', with: full_name
     fill_in 'Email', with: 'test@email.com'
