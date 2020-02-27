@@ -8,7 +8,7 @@ FactoryBot.define do
       # Before each test, create and login the user
       before(:each) do
         user = FactoryBot.create(:user)
-        login_as(user, :scope => :user)
+        login_as(user, scope: :user)
       end
     end
   end
