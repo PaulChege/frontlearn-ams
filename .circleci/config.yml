@@ -47,7 +47,7 @@ jobs:
       - checkout
       - heroku/install
       - heroku/deploy-via-git
-       - run:
+      - run:
           command: |
             heroku run rake db:migrate
             sleep 5 # sleep for 5 seconds to wait for dynos
