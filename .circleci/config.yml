@@ -49,6 +49,6 @@ jobs:
       - heroku/deploy-via-git
       - run:
           command: |
-            heroku run rake db:migrate
-            sleep 5 # sleep for 5 seconds to wait for dynos
+            heroku run rake db:migrate -a frontlearn-ams
+            sleep 5
             heroku restart
