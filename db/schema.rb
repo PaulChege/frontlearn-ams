@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_200_129_111_533) do
+ActiveRecord::Schema.define(version: 20_200_304_081_900) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
@@ -48,13 +48,13 @@ ActiveRecord::Schema.define(version: 20_200_129_111_533) do
     t.bigint 'assessment_id'
     t.float 'attendance'
     t.float 'assignments'
-    t.float 'practicals'
-    t.float 'cats'
-    t.float 'final_exam'
+    t.float 'cat_practical'
+    t.float 'cat_theory'
+    t.float 'final_practical'
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
-    t.float 'final_mark'
-    t.string 'final_grade'
+    t.float 'final_theory'
+    t.integer 'final_assessment'
     t.index ['assessment_id'], name: 'index_results_on_assessment_id'
     t.index ['student_id'], name: 'index_results_on_student_id'
     t.index ['unit_id'], name: 'index_results_on_unit_id'

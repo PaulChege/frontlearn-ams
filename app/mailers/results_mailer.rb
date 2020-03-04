@@ -8,7 +8,7 @@ class ResultsMailer < ApplicationMailer
 
     mail(
       to: @student.email,
-      subject: 'Exam Results',
+      subject: 'Assessment Results',
       student: @student,
       results: @results,
       assessment: @assessment

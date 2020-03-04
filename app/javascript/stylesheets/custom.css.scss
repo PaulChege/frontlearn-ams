@@ -26,3 +26,19 @@
   }
   margin-bottom: 30px;
 }
+
+.table thead th {
+  vertical-align: middle;
+}
+
+.results-table {
+  table {
+    table-layout: fixed;
+    input {
+      width: 100%;
+    }
+    th {
+      word-wrap: break-word;
+    }
+  }
+}

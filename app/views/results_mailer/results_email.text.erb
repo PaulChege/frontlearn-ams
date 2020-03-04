@@ -1,10 +1,22 @@
 Dear <%= @student.full_name %>,
 Here are your results for the assessments done during the semester starting <%= @assessment.full_semester_name %>.
-===============================================
+
 <% @results.each do |result| %>
-<%= result.unit.full_unit_name %>  | <%= result.final_mark %> | <%= result.final_grade %>
+<%= result.unit.full_unit_name %> 
+
+Attenadance: <%= result.attendance %> 
+Assignments: <%= result.assignments %>
+CAT Practical: <%= result.cat_practical %>
+CAT Theory: <%= result.cat_theory %>
+Final Practical: <%= result.final_practical %>
+Final Theory: <%= result.final_theory %>
+Assessment: <%= result.final_assessment.humanize %>
+
 ===============================================
 
 
 Kindly contact admin for any queries.
+
+Please do not reply to this email.
+
 <%end%>

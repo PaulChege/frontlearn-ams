@@ -4,19 +4,19 @@
 #
 # Table name: results
 #
-#  id            :bigint           not null, primary key
-#  unit_id       :bigint
-#  student_id    :bigint
-#  assessment_id :bigint
-#  attendance    :float
-#  assignments   :float
-#  practicals    :float
-#  cats          :float
-#  final_exam    :float
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  final_mark    :float
-#  final_grade   :string
+#  id              :bigint           not null, primary key
+#  unit_id         :bigint
+#  student_id      :bigint
+#  assessment_id   :bigint
+#  attendance      :float
+#  assignments     :float
+#  cat_practical   :float
+#  cat_theory      :float
+#  final_practical :float
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  final_theory    :float
+#  assessment      :integer
 #
 
 class Result < ApplicationRecord
@@ -24,22 +24,22 @@ class Result < ApplicationRecord
   belongs_to :student
   belongs_to :unit
 
-  before_update :calculate_final_mark_and_grade
+  before_update :calculate_final_assessment
 
   scope :by_student, lambda { |assessment_id|
                        where(assessment_id: assessment_id)
-                         .where.not(final_grade: nil)
+                         .where.not(final_assessment: nil)
                          .group_by(&:student_id)
                      }
 
-  def calculate_final_mark_and_grade
-    if attendance && assignments && cats && practicals && final_exam
-      pre_assessments = (attendance + assignments + practicals + cats) / 4
-      self.final_mark = (pre_assessments + (final_exam * 0.7)).round(2)
-      self.final_grade = calculate_final_grade(final_mark)
-    else
-      self.final_mark = nil
+  enum final_assessment: %i[competent not_competent]
+
+  def calculate_final_assessment
+    unless complete?
+      self.final_assessment = nil
+      return self
     end
+    self.final_assessment = is_competent? ? :competent : :not_competent
     self
   end
 
@@ -87,20 +87,21 @@ class Result < ApplicationRecord
     results
   end
 
-  def calculate_final_grade(mark)
-    case mark
-    when 0..39.99
-      'F'
-    when 40..49.99
-      'D'
-    when 50..59.99
-      'C'
-    when 60..69.99
-      'B'
-    when 70..100
-      'A'
-    else
-      ''
-    end
+  def is_competent?
+    attendance >= 80 &&
+      assignments >= 50 &&
+      cat_practical >= 80 &&
+      cat_theory >= 50 &&
+      final_practical >= 80 &&
+      final_theory >= 50
+  end
+
+  def complete?
+    attendance &&
+      assignments &&
+      cat_practical &&
+      cat_theory &&
+      final_practical &&
+      final_theory
   end
 end

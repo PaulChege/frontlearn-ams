@@ -9,15 +9,25 @@
     <table style="border: 1px solid black; border-style: collapse;">
       <thead style="background-color: #F36B08;color: white;">
         <th style="border: 1px solid black; padding: 10px;">Unit</th>
-        <th style="border: 1px solid black; padding: 10px;">Mark</th>
-        <th style="border: 1px solid black; padding: 10px;">Grade</th>
+        <th style="border: 1px solid black; padding: 10px;">Attendance</th>
+        <th style="border: 1px solid black; padding: 10px;">Assignments</th>
+        <th style="border: 1px solid black; padding: 10px;">CAT Practical</th>
+        <th style="border: 1px solid black; padding: 10px;">CAT Theory</th>
+        <th style="border: 1px solid black; padding: 10px;">Final Practical</th>
+        <th style="border: 1px solid black; padding: 10px;">Final Theory</th>
+        <th style="border: 1px solid black; padding: 10px;">Assessment</th>
       </thead>
       <tbody>
         <% @results.each do |result| %>
           <tr style="border: 1px solid black; padding: 10px;">
             <td style="border: 1px solid black; padding: 10px;"><%= result.unit.full_unit_name %></td>
-            <td style="border: 1px solid black; padding: 10px;"><%= result.final_mark %></td>
-            <td style="border: 1px solid black; padding: 10px;"><%= result.final_grade %></td>
+            <td style="border: 1px solid black; padding: 10px;"><%= result.attendance %></td>
+            <td style="border: 1px solid black; padding: 10px;"><%= result.assignments %></td>
+            <td style="border: 1px solid black; padding: 10px;"><%= result.cat_practical %></td>
+            <td style="border: 1px solid black; padding: 10px;"><%= result.cat_theory %></td>
+            <td style="border: 1px solid black; padding: 10px;"><%= result.final_practical %></td>
+            <td style="border: 1px solid black; padding: 10px;"><%= result.final_theory %></td>
+            <td style="border: 1px solid black; padding: 10px;"><%= result.final_assessment.humanize %></td>
           </tr>
         <%end%>
       </tbody>
@@ -25,9 +35,12 @@
     <br/>
     <p>Kindly contact admin for any queries.</p>
     <br/>
+    <i style="font-size: 10pt">Please do not reply to this email.</i>
+    <br/>
+    <br/>
     <br/>
     <img src="https://i.ibb.co/1KPxv6p/FRONTLEARN-LOGO.png" style="display:block" alt="logo" width="60" height="60" />
-    <p>Frontlearn Institute AMS</p>
-    <a href= "www.frontlearn.co.ke">www.frontlearn.co.ke</a>
+    <p><i>Frontlearn Institute AMS</i></p>
+    <a href= "www.frontlearn.co.ke"><i>www.frontlearn.co.ke</i></a>
   </body>
 </html>

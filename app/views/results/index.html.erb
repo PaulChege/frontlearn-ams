@@ -29,11 +29,11 @@
         <th>Full Name</th>
         <th>Attendance</th>
         <th>Assignments</th>
-        <th>Practicals</th>
-        <th>CATs</th>
-        <th>Final Exam</th>
-        <th>Final Mark</th>
-        <th>Final Grade</th>
+        <th>CAT Practical</th>
+        <th>CAT Theory</th>
+        <th>Final Practical</th>
+        <th>Final Theory</th>
+        <th>Final Assessment</th>
       </thead>
       <tbody>
         <% if @results.empty? %>
@@ -47,11 +47,21 @@
               <td><%= result.student.full_name%></td>
               <td><%= result.attendance %></td>
               <td><%= result.assignments %></td>
-              <td><%= result.practicals %></td>
-              <td><%= result.cats  %></td>
-              <td><%= result.final_exam %></td>    
-              <td><b><%= result.final_mark %></b></td>  
-              <td><b><%= result.final_grade %></b></td>  
+              <td><%= result.cat_practical %></td>
+              <td><%= result.cat_theory  %></td>
+              <td><%= result.final_practical %></td>    
+              <td><%= result.final_theory %></td>  
+              <td>
+                <% if result.final_assessment %> 
+                  <% if result.competent? %> 
+                    <span class="badge badge-success">
+                  <%else%>
+                    <span class="badge badge-warning">
+                  <%end%>
+                      <b><%= result.final_assessment.humanize %></b>
+                    </span>
+                <%end%>
+              </td>  
             </tr>
           <%end%>
         <%end%>

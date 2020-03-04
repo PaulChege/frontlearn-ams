@@ -70,16 +70,17 @@ RSpec.describe ResultsController, type: :controller do
   end
 
   describe 'PATCH #update_all' do
-    it 'should update results and calculate final marks and grades' do
+    it 'should update results and calculate final assessment ' do
       update_request =
         patch :update_all, params: {
           results: {
             result.id => {
-              attendance: 10.0,
-              assignments: 30.0,
-              practicals: 17.0,
-              cats: 22.0,
-              final_exam: 40.0
+              attendance: 40.0,
+              assignments: 40.0,
+              cat_practical: 47.0,
+              cat_theory: 42.0,
+              final_practical: 47.0,
+              final_theory: 42.0
             }
           },
           search: {
@@ -90,7 +91,7 @@ RSpec.describe ResultsController, type: :controller do
           }
         }
       expect { update_request && result.reload }.to(
-        change(result, :final_mark) && change(result, :final_grade)
+        change(result, :final_assessment)
       )
       expect(response).to be_redirect
     end

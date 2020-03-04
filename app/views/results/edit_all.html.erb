@@ -1,8 +1,8 @@
 <div class="container">
 	<h4><i class="far fa-file-alt"></i> Submit Results</h4>
   <br/>
-  <h6><%= @course.full_course_name + " / " + @unit.full_unit_name %></h6>
-  <%= "Intake: " + @intake + " / " + "Semester starting: " + @assessment.full_semester_name %>
+  <h6><%= @course.full_course_name + " -- " + @unit.full_unit_name %></h6>
+  <%= "Intake: " + @intake + " -- " + "Semester starting: " + @assessment.full_semester_name %>
 	<br/>
   <%= form_tag results_update_all_path(@redirect_params), method: :patch do %>
     <%= button_tag(:class => "btn btn-primary float-right") do %>
@@ -10,35 +10,47 @@
     <% end %>
     <br/>
     <br/>
-    <table class="table table-bordered table-responsive-sm table-sm">
-      <thead class="thead-light">
-        <th>Admission No.</th>
-        <th>Full Name</th>
-        <th>Attendance (30)</th>
-        <th>Assignments (30)</th>
-        <th>Practicals (30)</th>
-        <th>CATs (30)</th>
-        <th>Final Exam (100)</th>
-        <th>Final Mark</th>
-        <th>Final Grade</th>
-      </thead>
-      <tbody>
-        <% @results.each do |result| %>
-          <%= fields_for "results[]", result do |f| %>
-            <tr>
-              <td><%= result.student.admission_no%></td>
-              <td><%= result.student.full_name%></td>
-              <td><%= f.number_field :attendance, max: 30, step: ".1" %></td>
-              <td><%= f.number_field :assignments, max: 30, step: ".1" %></td>
-              <td><%= f.number_field :practicals, max: 30, step: ".1" %></td>
-              <td><%= f.number_field :cats, max: 30, step: ".1"  %></td>
-              <td><%= f.number_field :final_exam, max: 100, step: ".1" %></td>    
-              <td><b><%= result.final_mark %></b></td>  
-              <td><b><%= result.final_grade %></b></td>  
-            </tr>
+    <div class="results-table">
+      <table class="table table-bordered table-responsive-sm table-sm">
+        <thead class="thead-light">
+          <th>Admission No.</th>
+          <th>Full Name</th>
+          <th>Attendance (100)</th>
+          <th>Assignments (100)</th>
+          <th>CAT Practical (100)</th>
+          <th>CAT Theory (100)</th>
+          <th>Final Practical (100)</th>
+          <th>Final Theory (100)</th>
+          <th>Assessment</th>
+        </thead>
+        <tbody>
+          <% @results.each do |result| %>
+            <%= fields_for "results[]", result do |f| %>
+              <tr>
+                <td><%= result.student.admission_no%></td>
+                <td><%= result.student.full_name%></td>
+                <td><%= f.number_field :attendance, max: 100, min: 0, step: ".1" %></td>
+                <td><%= f.number_field :assignments, max: 100,min: 0, step: ".1" %></td>
+                <td><%= f.number_field :cat_practical, max: 100,min: 0, step: ".1" %></td>
+                <td><%= f.number_field :cat_theory, max: 100,min: 0, step: ".1"  %></td>
+                <td><%= f.number_field :final_practical, max: 100, min: 0, step: ".1" %></td>    
+                <td><%= f.number_field :final_theory, max: 100, min: 0, step: ".1" %></td>    
+                <td>
+                  <% if result.final_assessment %> 
+                    <% if result.competent? %> 
+                      <span class="badge badge-success">
+                    <%else%>
+                      <span class="badge badge-warning">
+                    <%end%>
+                        <b><%= result.final_assessment.humanize %></b>
+                      </span>
+                  <%end%>
+                </td>  
+              </tr>
+            <%end%>
           <%end%>
-        <%end%>
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+    </div>
   <% end%>
 </div>
