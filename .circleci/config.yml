@@ -6,7 +6,7 @@ workflows:
   heroku_deploy:
     jobs:
       - build
-      - heroku/deploy-via-git:
+      - deploy:
           requires:
             - build
           filters:
@@ -40,3 +40,16 @@ jobs:
       # Save test results
       - store_test_results:
           path: /tmp/test-results
+
+  deploy:
+    executor: heroku/default
+    steps:
+      - checkout
+      - heroku/install
+      - run:
+          command: |
+            git push heroku master
+            heroku run rake db:migrate
+            sleep 5 # sleep for 5 seconds to wait for dynos
+            heroku restart
+      - heroku/deploy-via-git
