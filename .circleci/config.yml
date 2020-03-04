@@ -49,6 +49,6 @@ jobs:
       - heroku/deploy-via-git
       - run:
           command: |
-            heroku run rake db:migrate -app frontlearn-ams
-            sleep 5 -app frontlearn-ams
-            heroku restart -app frontlearn-ams
+            heroku run rake db:migrate -a frontlearn-ams
+            sleep 5 -a frontlearn-ams
+            heroku restart -a frontlearn-ams
