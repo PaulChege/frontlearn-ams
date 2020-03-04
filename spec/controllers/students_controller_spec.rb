@@ -8,6 +8,7 @@ RSpec.describe StudentsController, type: :controller do
   let(:student) { create(:student) }
   let(:valid_attributes) do
     { student: {
+      admission_no: '0012018',
       first_name: 'Test',
       last_name: 'User',
       email: 'testuser@email.com',

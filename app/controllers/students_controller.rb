@@ -15,9 +15,6 @@ class StudentsController < ApplicationController
   def create
     @student = Student.new(student_params)
     if @student.save
-      # TODO: - Clean up
-      @student.admission_no = @student.get_admission_no
-      @student.save
       redirect_to students_path, notice: 'Student created successfully.'
     else
       render :new
@@ -44,6 +41,7 @@ class StudentsController < ApplicationController
 
   def student_params
     params.require(:student).permit(
+      :admission_no,
       :first_name,
       :last_name,
       :course_id,

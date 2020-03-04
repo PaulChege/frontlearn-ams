@@ -31,10 +31,6 @@ class Student < ApplicationRecord
 
   self.per_page = 10
 
-  def get_admission_no
-    id.to_s.rjust(4, '0')
-  end
-
   def self.get_intake_year_options
     current_year = Date.today.year
     (current_year - 2...current_year + 1).to_a
