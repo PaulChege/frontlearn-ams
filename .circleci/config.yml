@@ -50,5 +50,5 @@ jobs:
       - run:
           command: |
             heroku run rake db:migrate -a frontlearn-ams
-            sleep 5 -a frontlearn-ams
+            sleep 5
             heroku restart -a frontlearn-ams
