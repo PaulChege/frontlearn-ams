@@ -1,3 +1,4 @@
+$orange_fade: #ff6b0080;
 .title {
   padding: 20px;
 }
@@ -41,4 +42,9 @@
       word-wrap: break-word;
     }
   }
+}
+
+.alert {
+  margin-bottom: 0;
+  background-color: $orange_fade;
 }

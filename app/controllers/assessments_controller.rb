@@ -1,13 +1,11 @@
 # frozen_string_literal: true
 
 class AssessmentsController < ApplicationController
-  before_action :find_assessment, only: %i[change_status destroy update]
+  before_action :find_assessment, only: %i[destroy update]
   before_action :authorize
+  before_action :get_assessments, only: %i[index create]
 
   def index
-    @assessments = Assessment.all
-                             .order(semester_year: :desc)
-                             .page(params[:page])
     @assessment = Assessment.new
   end
 
@@ -17,7 +15,6 @@ class AssessmentsController < ApplicationController
     if @assessment.save
       redirect_to assessments_path, notice: 'Assessment period created successfully.'
     else
-      @assessments = Assessment.all
       render :index
     end
   end
@@ -44,5 +41,11 @@ class AssessmentsController < ApplicationController
 
   def authorize
     authorize! :crud, Assessment
+  end
+
+  def get_assessments
+    @assessments = Assessment.all
+                    .order(semester_year: :desc)
+                    .page(params[:page])
   end
 end
