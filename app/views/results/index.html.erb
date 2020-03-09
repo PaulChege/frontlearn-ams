@@ -24,47 +24,50 @@
   </div>
   <br/>
   <table class="table table-bordered table-responsive-sm table-sm">
-      <thead class="thead-light">
-        <th>Admission No.</th>
-        <th>Full Name</th>
-        <th>Attendance</th>
-        <th>Assignments</th>
-        <th>CAT Practical</th>
-        <th>CAT Theory</th>
-        <th>Final Practical</th>
-        <th>Final Theory</th>
-        <th>Assessment</th>
-      </thead>
-      <tbody>
-        <% if @results.empty? %>
-          <span style="color: red">
-            No Results Found.
-          </span>
-        <%else%>
-          <% @results.each do |result| %>
-            <tr>
-              <td><%= result.student.admission_no%></td>
-              <td><%= result.student.full_name%></td>
-              <td><%= result.attendance %></td>
-              <td><%= result.assignments %></td>
-              <td><%= result.cat_practical %></td>
-              <td><%= result.cat_theory  %></td>
-              <td><%= result.final_practical %></td>    
-              <td><%= result.final_theory %></td>  
-              <td>
-                <% if result.final_assessment %> 
-                  <% if result.competent? %> 
-                    <span class="badge badge-success">
-                  <%else%>
-                    <span class="badge badge-warning">
-                  <%end%>
-                      <b><%= result.final_assessment.humanize %></b>
-                    </span>
+    <thead class="thead-light">
+      <th>Admission No.</th>
+      <th>Full Name</th>
+      <th>Attendance</th>
+      <th>Assignments</th>
+      <th>CAT Practical</th>
+      <th>CAT Theory</th>
+      <th>Final Practical</th>
+      <th>Final Theory</th>
+      <th>Assessment</th>
+    </thead>
+    <tbody>
+      <% if @results.empty? %>
+        <span style="color: red">
+          No Results Found.
+        </span>
+      <%else%>
+        <% @results.each do |result| %>
+          <tr>
+            <td><%= result.student.admission_no%></td>
+            <td><%= result.student.full_name%></td>
+            <td><%= result.attendance %></td>
+            <td><%= result.assignments %></td>
+            <td><%= result.cat_practical %></td>
+            <td><%= result.cat_theory  %></td>
+            <td><%= result.final_practical %></td>    
+            <td><%= result.final_theory %></td>  
+            <td>
+              <% if result.final_assessment %> 
+                <% if result.competent? %> 
+                  <span class="badge badge-success">
+                <%else%>
+                  <span class="badge badge-warning">
                 <%end%>
-              </td>  
-            </tr>
-          <%end%>
+                    <b><%= result.final_assessment.humanize %></b>
+                  </span>
+              <%end%>
+            </td>  
+          </tr>
         <%end%>
-      </tbody>
-    </table>
+      <%end%>
+    </tbody>
+  </table>
+  <div class="digg_pagination">
+    <%= will_paginate @results %>
+  </div>
 </div>

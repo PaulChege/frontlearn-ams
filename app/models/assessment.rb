@@ -17,6 +17,8 @@ class Assessment < ApplicationRecord
   enum status: %i[open closed]
   validate :semester_uniqueness
 
+  self.per_page = 10
+
   def full_semester_name
     semester_month.to_s + '-' + semester_year.to_s
   end

@@ -12,19 +12,6 @@
 	<div class="card">
 		<div class="card-body">
 			<%= render "shared/error_messages", resource: @unit %>
-			<h5>Add Existing Unit to Course:</h5>
-			<br/>
-			<%= form_for @course, url: school_course_add_unit_path(@school, @course), html: {class: "form-inline"}, method: :post do |f| %>
-				<div class="form-group mb-2">
-					<%= f.label "Unit", class: "mx-sm-3" %>
-					<%= collection_select(:unit, :id, Unit.all, :id, :full_unit_name) %>
-				</div>
-				<%= button_tag(:class => "btn btn-primary mx-sm-3 mb-2") do %>
-					<i class='fas fa-plus'></i> Add
-				<% end %>
-			<% end %>
-			<br/>
-			<br/>
 			<h5>Create New Unit and Add to Course:</h5>
 			<br/>
 			<%= form_for @unit, url: school_course_units_path(@school, @course), html: {class: "form-inline"} do |f| %>
@@ -40,10 +27,24 @@
 					<i class='fas fa-plus'></i> Add
 				<% end %>
 			<% end %>
+			<br/>
+			<br/>
+			<h5>Add Existing Unit to Course:</h5>
+			<br/>
+			<%= form_for @course, url: school_course_add_unit_path(@school, @course), html: {class: "form-inline"}, method: :post do |f| %>
+				<div class="form-group mb-2">
+					<%= f.label "Unit", class: "mx-sm-3" %>
+					<%= collection_select(:unit, :id, @all_units, :id, :full_unit_name, :prompt => "Select Unit") %>
+				</div>
+				<%= button_tag(:class => "btn btn-primary mx-sm-3 mb-2") do %>
+					<i class='fas fa-plus'></i> Add
+				<% end %>
+			<% end %>
+		
 		</div>
 	</div>
 	<br/>
-  <table class="table table-bordered table-responsive-sm table-sm col-sm-5">
+  <table class="table table-bordered table-responsive-sm table-sm col-sm-8">
     <thead class="thead-light">
 			<th>Code</th>
 			<th>Name</th>
@@ -68,4 +69,8 @@
 			<% end%>
 		<tbody>
 	<table>
+	<br/>
+	<div class="digg_pagination">
+		<%= will_paginate @units %>
+	</div>
 </div>

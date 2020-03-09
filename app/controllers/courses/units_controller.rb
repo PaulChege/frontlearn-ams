@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
 class Courses::UnitsController < ApplicationController
-  before_action :get_school, :get_course, :get_units, :authorize, except: :units_json
+  before_action :get_school, :get_course, :get_units,
+                :authorize, except: :units_json
 
   def index
     @unit = Unit.new
+    @all_units = Unit.all.order(:code)
   end
 
   def units_json
@@ -18,7 +20,8 @@ class Courses::UnitsController < ApplicationController
     @unit = Unit.new(unit_params)
     if @unit.save
       @course.units << @unit
-      redirect_to school_course_units_path(@school, @course), notice: 'Unit created and added to course successfully.'
+      redirect_to school_course_units_path(@school, @course),
+                  notice: 'Unit created and added to course successfully.'
     else
       render :index
     end
@@ -28,7 +31,8 @@ class Courses::UnitsController < ApplicationController
     @unit = Unit.find(params[:unit][:id])
     if !@course.units.exists?(@unit.id)
       @course.units << @unit
-      redirect_to school_course_units_path(@school, @course), notice: 'Unit added to course successfully.'
+      redirect_to school_course_units_path(@school, @course),
+                  notice: 'Unit added to course successfully.'
     else
       @unit.errors.add(:base, 'Unit already added.')
       render :index
@@ -38,7 +42,8 @@ class Courses::UnitsController < ApplicationController
   def destroy
     @unit = Unit.find(params[:id])
     @course.units.delete(@unit)
-    redirect_to school_course_units_path(@school, @course), notice: 'Unit removed successfully.'
+    redirect_to school_course_units_path(@school, @course),
+                notice: 'Unit removed successfully.'
   end
 
   private
@@ -60,6 +65,6 @@ class Courses::UnitsController < ApplicationController
   end
 
   def get_units
-    @units = @course.units
+    @units = @course.units.page(params[:page])
   end
 end

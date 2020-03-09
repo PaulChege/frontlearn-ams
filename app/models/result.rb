@@ -34,6 +34,8 @@ class Result < ApplicationRecord
 
   enum final_assessment: %i[competent not_competent]
 
+  self.per_page = 10
+
   def calculate_final_assessment
     unless complete?
       self.final_assessment = nil

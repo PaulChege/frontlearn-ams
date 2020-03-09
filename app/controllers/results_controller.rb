@@ -11,6 +11,7 @@ class ResultsController < ApplicationController
       @results = Result
                  .where(unit_id: search_params[:unit_id])
                  .where(assessment_id: search_params[:assessment_id])
+                 .page(params[:page])
       @params = search_params
     end
   end
@@ -28,7 +29,8 @@ class ResultsController < ApplicationController
   def edit_all
     if @results.empty? || !search_params[:course_id].present?
       redirect_to results_search_path,
-                  notice: 'No Results. There are no students scheduled for the chosen assessment.'
+                  notice: 'No Results.
+                    There are no students scheduled for the chosen assessment.'
       return
     end
     @course = Course.find(search_params[:course_id])
@@ -52,7 +54,8 @@ class ResultsController < ApplicationController
     results_by_student = Result.by_student(send_params[:assessment_id])
     if results_by_student.empty?
       redirect_to results_choose_period_path,
-                  notice: 'No Results. There are no final results for the period selected.'
+                  notice: 'No Results.
+                    There are no final results for the period selected.'
     else
       Result.send_email_notifications(send_params[:assessment_id], results_by_student)
       redirect_to results_choose_period_path,

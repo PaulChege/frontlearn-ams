@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   before_action :authorize
 
   def index
-    @users = User.all
+    @users = User.all.page(params[:page])
   end
 
   def new

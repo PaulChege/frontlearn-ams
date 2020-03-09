@@ -17,6 +17,8 @@ class Unit < ApplicationRecord
   has_many :results, dependent: :delete_all
   validates :code, :name, presence: true, uniqueness: true
 
+  self.per_page = 10
+
   def full_unit_name
     code + '-' + name
   end

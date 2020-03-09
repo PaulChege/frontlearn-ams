@@ -24,4 +24,6 @@ class User < ApplicationRecord
   validates :full_name, :role, presence: :true
 
   enum role: %i[lecturer admin]
+
+  self.per_page = 10
 end

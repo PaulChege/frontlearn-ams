@@ -5,7 +5,7 @@ class AssessmentsController < ApplicationController
   before_action :authorize
 
   def index
-    @assessments = Assessment.all
+    @assessments = Assessment.all.page(params[:page])
     @assessment = Assessment.new
   end
 
