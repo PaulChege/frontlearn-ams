@@ -5,7 +5,9 @@ class AssessmentsController < ApplicationController
   before_action :authorize
 
   def index
-    @assessments = Assessment.all.page(params[:page])
+    @assessments = Assessment.all
+                             .order(semester_year: :desc)
+                             .page(params[:page])
     @assessment = Assessment.new
   end
 

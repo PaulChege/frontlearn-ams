@@ -10,7 +10,6 @@
 				<%= form_for @assessment, url: assessments_path, html: {class: "form-inline"} do |f| %>
 					<div class="form-group mb-2 ">
             <%= f.label "Semester starting:" , class: "mx-sm-3"%><br />
-            <%# TODO - Move intake functions to general helper %>
             <%= f.select :semester_month, Student.intake_months.keys.to_a, class: "form-control" %>
             <%= f.select :semester_year, Student.get_intake_year_options, class: "form-control" %>
           </div>
@@ -77,7 +76,10 @@
 			<% end%>
 		<tbody>
 	<table>
-	<div class="digg_pagination">
-		<%= will_paginate @assessments %>
-	</div>
+	<br/>
+	<% unless @assessments.empty? %>
+		<div class="digg_pagination">
+			<%= will_paginate @assessments %>
+		</div>
+	<%end%>
 </div>

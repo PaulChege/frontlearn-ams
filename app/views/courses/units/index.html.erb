@@ -70,7 +70,9 @@
 		<tbody>
 	<table>
 	<br/>
-	<div class="digg_pagination">
-		<%= will_paginate @units %>
-	</div>
+	<% unless @units.empty? %>
+		<div class="digg_pagination">
+			<%= will_paginate @units %>
+		</div>
+	<% end %>
 </div>

@@ -67,7 +67,10 @@
       <%end%>
     </tbody>
   </table>
-  <div class="digg_pagination">
-    <%= will_paginate @results %>
-  </div>
+  <br/>
+  <% unless @results.empty? %>
+    <div class="digg_pagination">
+      <%= will_paginate @results %>
+    </div>
+  <% end %>
 </div>

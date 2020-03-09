@@ -3,10 +3,10 @@
 class Courses::UnitsController < ApplicationController
   before_action :get_school, :get_course, :get_units,
                 :authorize, except: :units_json
+  before_action :get_all_units, except: %i[units_json destroy]
 
   def index
     @unit = Unit.new
-    @all_units = Unit.all.order(:code)
   end
 
   def units_json
@@ -65,6 +65,10 @@ class Courses::UnitsController < ApplicationController
   end
 
   def get_units
-    @units = @course.units.page(params[:page])
+    @units = @course.units.order(:code).page(params[:page])
+  end
+
+  def get_all_units
+    @all_units = Unit.all.order(:code)
   end
 end

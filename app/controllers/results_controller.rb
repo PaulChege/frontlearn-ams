@@ -11,6 +11,7 @@ class ResultsController < ApplicationController
       @results = Result
                  .where(unit_id: search_params[:unit_id])
                  .where(assessment_id: search_params[:assessment_id])
+                 .order(:final_assessment, final_theory: :desc)
                  .page(params[:page])
       @params = search_params
     end
@@ -22,7 +23,8 @@ class ResultsController < ApplicationController
     @assessments = Assessment.where(status: 'open')
     @intakes = Student.intakes
     if @assessments.empty?
-      redirect_to root_path, notice: 'Sorry, There are currently no open assessments.'
+      redirect_to root_path, notice:
+        'Sorry, There are currently no open assessments.'
     end
   end
 

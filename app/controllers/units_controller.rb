@@ -5,7 +5,7 @@ class UnitsController < ApplicationController
   before_action :authorize
 
   def index
-    @units = Unit.all.page(params[:page])
+    @units = Unit.all.order(:code).page(params[:page])
   end
 
   def edit; end
