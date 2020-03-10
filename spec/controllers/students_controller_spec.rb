@@ -26,15 +26,15 @@ RSpec.describe StudentsController, type: :controller do
     end
 
     it 'should search students by name' do
-      get :index, params: {student_search: {query: student.first_name}}
+      get :index, params: { student_search: { query: student.first_name } }
       expect(response).to be_successful
-      expect(assigns(:students).first.first_name).to eq(student.first_name) 
+      expect(assigns(:students).first.first_name).to eq(student.first_name)
     end
 
     it 'should search students by admission number' do
-      get :index, params: {student_search: {query: student.admission_no}}
+      get :index, params: { student_search: { query: student.admission_no } }
       expect(response).to be_successful
-      expect(assigns(:students).first.admission_no).to eq(student.admission_no) 
+      expect(assigns(:students).first.admission_no).to eq(student.admission_no)
     end
   end
 

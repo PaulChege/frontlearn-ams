@@ -45,7 +45,7 @@ class AssessmentsController < ApplicationController
 
   def get_assessments
     @assessments = Assessment.all
-                    .order(semester_year: :desc)
-                    .page(params[:page])
+                             .order(semester_year: :desc)
+                             .page(params[:page])
   end
 end
