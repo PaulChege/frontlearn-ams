@@ -5,7 +5,14 @@ class StudentsController < ApplicationController
   before_action :authorize, except: :index
 
   def index
-    @students = Student.all.order(created_at: :desc).page(params[:page])
+    if params[:student_search].nil? || student_search_params[:query].empty?
+      @students = Student.all
+    else
+      @students = Student.search_by_admission_or_name(
+        student_search_params[:query]
+      )
+    end
+    @students = @students.order(created_at: :desc).page(params[:page])
   end
 
   def new
@@ -38,6 +45,10 @@ class StudentsController < ApplicationController
   end
 
   private
+
+  def student_search_params
+    params.require(:student_search).permit(:query)
+  end
 
   def student_params
     params.require(:student).permit(

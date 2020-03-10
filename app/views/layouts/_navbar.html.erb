@@ -35,8 +35,8 @@
                 <div class="dropdown-divider"></div>
               <%end%>
               <%= link_to  "Submit Results", results_search_path, class: "dropdown-item"%>
-              <div class="dropdown-divider"></div>
               <% if can? :send, Result %>
+                <div class="dropdown-divider"></div>
                 <%= link_to  "Send Results", results_choose_period_path, class: "dropdown-item"%>
               <%end%>
             </div>

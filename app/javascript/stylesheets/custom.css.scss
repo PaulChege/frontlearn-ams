@@ -1,4 +1,6 @@
+$orange: #ff6b00;
 $orange_fade: #ff6b0080;
+
 .title {
   padding: 20px;
 }
@@ -47,4 +49,8 @@ $orange_fade: #ff6b0080;
 .alert {
   margin-bottom: 0;
   background-color: $orange_fade;
+}
+
+.warning-text {
+  color: $orange;
 }

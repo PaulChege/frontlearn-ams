@@ -12,7 +12,7 @@ RSpec.describe 'Logging in a user', type: :feature do
     fill_in 'Email', with: @user.email
     fill_in 'Password', with: @user.password
     click_button 'Log in'
-    expect(page).to have_content('Signed in successfully')
+    expect(page).to have_content('Logged in successfully')
     expect(page).to have_content(@user.full_name)
   end
 

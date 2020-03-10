@@ -26,7 +26,14 @@ class Student < ApplicationRecord
         lambda { |course_id, intake|
           select { |s| s.intake == intake && s.course_id == course_id }
         }
-
+  scope :search_by_admission_or_name, 
+        lambda {|query|
+          where("LOWER(first_name) LIKE ? ", "%#{query.downcase}%").or(
+            where("LOWER(last_name) LIKE ? ", "%#{query.downcase}%")).or(
+              where("LOWER(admission_no) LIKE ? ", "%#{query.downcase}%")
+            )
+        }
+        
   enum intake_month: %w[Jan Apr Jul Oct]
 
   self.per_page = 10

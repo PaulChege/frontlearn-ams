@@ -37,9 +37,9 @@
     </thead>
     <tbody>
       <% if @results.empty? %>
-        <span style="color: red">
-          No Results Found.
-        </span>
+        	<span class="warning-text">
+						<i class="fas fa-times"></i> No results found.
+					</span>
       <%else%>
         <% @results.each do |result| %>
           <tr>
