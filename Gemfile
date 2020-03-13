@@ -90,3 +90,6 @@ gem 'dotenv-rails', groups: %i[development test]
 
 # Pagination
 gem 'will_paginate', '~> 3.1.1'
+
+# Mobile number validation
+gem 'phonelib'

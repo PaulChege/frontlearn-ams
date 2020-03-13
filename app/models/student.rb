@@ -19,6 +19,7 @@
 
 class Student < ApplicationRecord
   validates :first_name, :last_name, :email, :mobile_number, presence: :true
+  validates :mobile_number, phone: true
   belongs_to :course
   has_many :results, dependent: :delete_all
 
@@ -26,6 +27,7 @@ class Student < ApplicationRecord
         lambda { |course_id, intake|
           select { |s| s.intake == intake && s.course_id == course_id }
         }
+
   scope :search_by_admission_or_name,
         lambda { |query|
           where('LOWER(first_name) LIKE ? ', "%#{query.downcase}%").or(
