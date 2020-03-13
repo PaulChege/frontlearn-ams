@@ -6,7 +6,7 @@ FactoryBot.define do
     last_name { Faker::Name.last_name }
     admission_no { Faker::Number.number(digits: 4) }
     email { Faker::Internet.email }
-    mobile_number { Faker::PhoneNumber.cell_phone }
+    mobile_number { '0711222333' }
     intake_month { 1 }
     intake_year { Time.now.year }
     course
