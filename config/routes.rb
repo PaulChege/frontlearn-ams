@@ -29,7 +29,7 @@ Rails.application.routes.draw do
   resources :units, except: %i[new create]
   resources :students
   resources :assessments, except: %i[new edit]
-  resources :results, only: %i[index edit]
+  resources :results, only: %i[index]
   namespace :results do
     get 'search'
     get 'edit_all'

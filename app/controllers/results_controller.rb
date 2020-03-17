@@ -33,7 +33,6 @@ class ResultsController < ApplicationController
       redirect_to results_search_path,
                   notice: 'No Results.
                     There are no students scheduled for the chosen assessment.'
-      return
     end
     @course = Course.find(search_params[:course_id])
     @unit = Unit.find(search_params[:unit_id])

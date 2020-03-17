@@ -79,13 +79,17 @@ class Result < ApplicationRecord
   private
 
   def self.validate_assessment(results_assessment, selected_assessment, results)
-    if results_assessment.nil?
-      results.each do |result|
-        result.update(assessment_id: selected_assessment)
-      end
-    elsif results_assessment != selected_assessment
+    if (results_assessment != selected_assessment) && !results_assessment.nil?
+      results.each { |r| r.destroy if r.assessment_id.nil? }
       results = []
     end
+
+    results.each do |result|
+      if result.assessment_id.nil?
+        result.update(assessment_id: selected_assessment)
+      end
+    end
+
     results
   end
 
