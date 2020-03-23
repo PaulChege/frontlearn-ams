@@ -34,7 +34,7 @@ RSpec.describe 'users index page', type: :feature do
   end
 
   scenario 'logging out user' do
-    click_link('Logout')
+    click_link('Log out')
     expect(page).to have_content('Log in')
   end
 end

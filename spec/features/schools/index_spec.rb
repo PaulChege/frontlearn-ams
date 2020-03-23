@@ -11,7 +11,7 @@ RSpec.describe "schools' index page" do
     visit schools_path
   end
 
-  scenario 'renders index page' do
+  scenario 'rendering index page' do
     expect(page).to have_content('Schools')
     expect(page).to have_content(@school.name)
   end

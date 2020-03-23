@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Logging in a user', type: :feature do
+RSpec.describe 'Logging a user in', type: :feature do
   before(:each) do
     @user = create(:user)
     visit new_user_session_path
