@@ -1,4 +1,6 @@
-require "rails_helper"
+# frozen_string_literal: true
+
+require 'rails_helper'
 
 RSpec.describe 'all units index page' do
   login_user
@@ -6,7 +8,7 @@ RSpec.describe 'all units index page' do
   before(:each) do
     @unit =  create(:unit)
     Capybara.current_driver = :selenium_chrome
-    visit units_path    
+    visit units_path
   end
 
   scenario 'rendering index page' do

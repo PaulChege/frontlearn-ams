@@ -33,7 +33,7 @@
 			<br/>
 			<%= form_for @course, url: school_course_add_unit_path(@school, @course), html: {class: "form-inline"}, method: :post do |f| %>
 				<div class="form-group mb-2">
-					<%= f.label "Unit", class: "mx-sm-3" %>
+					<%= f.label :unit, class: "mx-sm-3" %>
 					<%= collection_select(:unit, :id, @all_units, :id, :full_unit_name, :prompt => "Select Unit") %>
 				</div>
 				<%= button_tag(:class => "btn btn-primary mx-sm-3 mb-2") do %>

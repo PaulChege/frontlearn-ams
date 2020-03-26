@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'creating a school' do
@@ -9,8 +11,8 @@ RSpec.describe 'creating a school' do
 
   scenario 'with valid attributes' do
     fill_in('Name', with: 'ICT')
-    click_button('Create School') 
-    expect(page).to have_content('ICT') 
+    click_button('Create School')
+    expect(page).to have_content('ICT')
   end
 
   scenario 'with invalid attributes' do

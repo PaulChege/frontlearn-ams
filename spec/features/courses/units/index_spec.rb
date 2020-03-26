@@ -1,4 +1,6 @@
-require "rails_helper"
+# frozen_string_literal: true
+
+require 'rails_helper'
 
 RSpec.describe 'course units index page' do
   login_user
@@ -6,6 +8,8 @@ RSpec.describe 'course units index page' do
   before(:each) do
     Capybara.current_driver = :selenium_chrome
     @course = create(:course)
+    @unit = create(:unit)
+    @course_unit = create(:course_unit, course: @course, unit: create(:unit))
     visit school_course_units_path(@course.school, @course)
   end
 
@@ -23,9 +27,19 @@ RSpec.describe 'course units index page' do
   end
 
   scenario 'adding an existing unit' do
-    @unit = create(:unit)
-    select(@unit.full_unit_name, from: 'Unit')
-    click_link('Add')
+    find_field(id: 'unit_id').select(@unit.full_unit_name)
+    click_button('Add')
+    expect(page).to have_content('Unit added to course')
     expect(page).to have_content(@unit.full_unit_name)
+  end
+
+  scenario 'removing unit from course' do
+    find_link(
+      href: "/schools/#{@course.school.id}" \
+      "/courses/#{@course.id}/units/#{@course_unit.unit.id}"
+    ).click
+    expect(page).to have_content('Are you sure')
+    click_button('Yes')
+    expect(page.find('.table')).not_to have_content(@course_unit.unit.code)
   end
 end
