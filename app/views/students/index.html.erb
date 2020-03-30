@@ -64,7 +64,10 @@
 									<i class='far fa-edit'></i> Edit
 								<% end %>
 								<%= link_to student_path(student), method: :delete, 
-									:class => "btn btn-outline-danger btn-sm mx-sm-2" do %>
+									data: { 
+										confirm_swal: "Are you sure you want to delete student #{student.full_name} ?"
+									}, 
+									:class => "btn btn-sm btn-outline-danger" do %>
 									<i class='far fa-trash-alt'></i> Delete
 								<% end %>
 							</td>

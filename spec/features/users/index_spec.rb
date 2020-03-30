@@ -16,12 +16,12 @@ RSpec.describe 'users index page', type: :feature do
     expect(page).to have_content(@user.full_name)
   end
 
-  scenario 'opening add user form' do
+  scenario 'opening add user page' do
     click_link('Add User')
     expect(page).to have_content('Add User')
   end
 
-  scenario 'opening edit user form' do
+  scenario 'opening edit user page' do
     find_link(href: "/users/#{@user.id}/edit").click
     expect(page).to have_content('Edit User')
   end
