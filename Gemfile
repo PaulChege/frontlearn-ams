@@ -65,6 +65,9 @@ group :test do
 
   # Generates fake data for tests
   gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'master'
+
+  # Cleaning database during tests
+  gem 'database_cleaner-active_record'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
