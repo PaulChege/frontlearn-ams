@@ -17,6 +17,22 @@ RSpec.describe 'students index page' do
     expect(find('.table')).to have_content(@students.first.first_name)
   end
 
+  scenario 'searching for student by name' do
+    find_field(id: 'student_search_query')
+      .fill_in(with: @students.first.first_name)
+    find_button(name: 'button').click
+    expect(page).to have_content(@students.first.first_name)
+    expect(page.all('.table').count).to eq(1)
+  end
+
+  scenario 'searching for student by admission number' do
+    find_field(id: 'student_search_query')
+      .fill_in(with: @students.first.admission_no)
+    find_button(name: 'button').click
+    expect(page).to have_content(@students.first.admission_no)
+    expect(page.all('.table').count).to eq(1)
+  end
+
   scenario 'opening add student page' do
     click_link('Add Student')
     expect(page).to have_content('Add Student')
