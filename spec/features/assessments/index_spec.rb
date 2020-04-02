@@ -31,5 +31,16 @@ RSpec.describe 'assessments index page' do
   end
 
   scenario 'opening and closing assessment period' do
+    find_link(href: "/assessments/#{@assessment.id}", text: 'Close').click
+    expect(page).to have_content('Are you sure')
+    click_button('Yes')
+    expect(page).to have_content('closed')
+  end
+
+  scenario 'deleting an assessment period' do
+    find_link(href: "/assessments/#{@assessment.id}", text: 'Delete').click
+    expect(page).to have_content('Are you sure')
+    click_button('Yes')
+    expect(page).not_to have_content(@assessment.full_semester_name)
   end
 end
