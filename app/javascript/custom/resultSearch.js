@@ -1,5 +1,3 @@
-import Swal from "sweetalert2";
-
 document.addEventListener("turbolinks:load", () => {
   if (window.location.pathname == "/results") {
     getUnits();
@@ -13,7 +11,7 @@ const getUnits = () => {
   var course_dd = document.getElementById("search_course_id");
   var units_dd = document.getElementById("search_unit_id");
   $("#search_unit_id").empty();
-  $.getJSON(`/courses/${course_dd.value}/units_json`, function(data) {
+  $.getJSON(`/courses/${course_dd.value || 0}/units_json`, function(data) {
     data.forEach(unit => {
       var urlParams = new URLSearchParams(window.location.search);
       var selected = false;

@@ -14,6 +14,10 @@ class Courses::UnitsController < ApplicationController
     respond_to do |format|
       format.json { render json: @units }
     end
+  rescue ActiveRecord::RecordNotFound
+    respond_to do |format|
+      format.json { render json: [] }
+    end
   end
 
   def create
